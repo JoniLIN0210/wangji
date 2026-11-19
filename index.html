@@ -140,8 +140,8 @@ svg{display:block}
 .compare-entry p small{display:block;font-weight:700;font-size:12px;opacity:.9;margin-top:3px}
 .month{margin-bottom:22px}
 .mhead{display:flex;align-items:center;gap:10px;margin:0 2px 10px}
-.mhead .badge{width:56px;height:56px;border-radius:50%;background:var(--c);display:grid;place-items:center;text-align:center;font-size:17px;font-weight:900;line-height:1;transform:rotate(-8deg);border:3px solid #fff;box-shadow:0 3px 8px rgba(59,45,58,.1);flex:none}
-.mhead .badge small{display:block;font-size:9px;font-weight:800;margin-top:2px;opacity:.7}
+.mhead .badge{width:56px;height:56px;border-radius:50%;background:var(--c);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;font-size:18px;font-weight:900;line-height:1;transform:rotate(-8deg);border:3px solid #fff;box-shadow:0 3px 8px rgba(59,45,58,.1);flex:none}
+.mhead .badge small{display:block;font-size:9px;font-weight:800;line-height:1;margin-top:3px;opacity:.7}
 .mhead .t{flex:1}
 .mhead b{font-size:15px;font-weight:900;display:block}
 .mhead span{font-size:12px;color:var(--sub);font-weight:700}
@@ -167,9 +167,10 @@ svg{display:block}
 .row>span{color:var(--sub);font-size:13px;flex:none}
 .care-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 .care{background:#fff;border-radius:26px;padding:16px;position:relative;box-shadow:var(--sh)}
-.care .ring{width:60px;height:60px;position:relative;margin-bottom:12px}
-.care .ring span{position:absolute;inset:0;display:grid;place-items:center;font-size:16px;font-weight:900;text-align:center;line-height:1}
-.care .ring span small{font-size:9px;display:block;color:var(--sub)}
+.care .ring{width:64px;height:64px;position:relative;margin-bottom:12px}
+.care .ring span{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:17px;font-weight:900;text-align:center;line-height:1}
+.care .ring span.s{font-size:15px}
+.care .ring span small{font-size:10px;line-height:1;display:block;color:var(--sub);margin:3px 0 0}
 .care b{font-size:16px;font-weight:900;display:block}
 .care small{font-size:12px;color:var(--sub);display:block;margin-top:3px;font-weight:700;line-height:1.5}
 .care>button{position:absolute;right:14px;top:14px;font-size:12px;font-weight:800;padding:7px 11px;border-radius:12px;background:var(--bg)}
@@ -275,6 +276,46 @@ svg{display:block}
 .toast{position:absolute;left:50%;top:62px;transform:translate(-50%,-20px);background:var(--ink);color:#fff;font-size:13px;font-weight:800;padding:11px 18px;border-radius:18px;z-index:90;opacity:0;transition:.35s cubic-bezier(.3,1.5,.5,1);pointer-events:none;white-space:nowrap}
 .toast.on{opacity:1;transform:translate(-50%,0)}
 .scanning{text-align:center;padding:18px;font-weight:800;color:var(--sub);font-size:14px}
+.upload.slim{flex-direction:row;justify-content:center;padding:13px 16px;gap:8px;border-width:2.5px;border-radius:20px}
+.upload.slim img{display:none}
+.det{position:relative}
+.det .rm{position:absolute;right:8px;top:8px;width:26px;height:26px;border-radius:50%;background:#fff;font-size:14px;font-weight:900;color:var(--sub);display:grid;place-items:center}
+.det .th{position:relative}
+.det .th i,.pt i{position:absolute;right:5px;bottom:5px;width:20px;height:20px;border-radius:50%;background:rgba(0,0,0,.4);display:grid;place-items:center}
+.stick{position:sticky;bottom:0;z-index:3;margin:0 -22px;padding:14px 22px 4px;background:linear-gradient(rgba(255,255,255,0),#fff 16px)}
+.stick:empty{display:none}
+.stick .submit{margin-top:0;display:flex;align-items:center;justify-content:center;gap:8px}
+.stick .clr{display:block;margin:10px auto 0;font-size:12px;font-weight:800;color:var(--sub)}
+.pics{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.pt{position:relative;aspect-ratio:1;border-radius:14px;overflow:hidden;background:var(--bg);cursor:pointer}
+.pt img{width:100%;height:100%;object-fit:cover}
+.pt b{position:absolute;right:4px;top:4px;width:22px;height:22px;border-radius:50%;background:rgba(59,45,58,.55);color:#fff;font-size:13px;display:grid;place-items:center;line-height:1}
+.pt.add{display:grid;place-items:center;border:2.5px dashed #F2D2DB;font-size:26px;font-weight:700;color:var(--sub)}
+.attrow{display:flex;gap:6px;margin-top:10px;overflow-x:auto;scrollbar-width:none}
+.attrow::-webkit-scrollbar{display:none}
+.attrow img{width:56px;height:56px;border-radius:12px;object-fit:cover;flex:none;cursor:pointer}
+.mini-att{display:flex;align-items:center;flex:none}
+.mini-att img{width:28px;height:28px;border-radius:9px;object-fit:cover;border:2px solid #fff;margin-left:-8px;cursor:pointer}
+.mini-att img:first-child{margin-left:0}
+.mo .att{width:100%;height:64px;border-radius:14px;object-fit:cover;margin-bottom:8px}
+
+.vw{position:absolute;inset:0;z-index:70;background-color:var(--bg);background-image:radial-gradient(#FBE3E9 1.6px,transparent 1.6px);background-size:22px 22px;display:flex;flex-direction:column;opacity:0;pointer-events:none;transform:scale(.97);transition:opacity .25s,transform .3s cubic-bezier(.2,1.1,.3,1)}
+.vw.on{opacity:1;pointer-events:auto;transform:none}
+.vw-top{display:flex;align-items:center;justify-content:space-between;padding:56px 18px 10px;flex:none}
+.vw-top button{width:42px;height:42px;border-radius:15px;background:#fff;box-shadow:var(--sh);font-size:16px;font-weight:900;display:grid;place-items:center}
+.vw-top span{font-size:13px;font-weight:900;background:#fff;border-radius:12px;padding:6px 12px}
+.vw-track{flex:1;min-height:0;display:flex;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;scrollbar-width:none;overscroll-behavior-x:contain}
+.vw-track::-webkit-scrollbar{display:none}
+.vw-s{flex:0 0 100%;scroll-snap-align:center;scroll-snap-stop:always;display:flex;align-items:center;justify-content:center;padding:0 16px;min-width:0}
+.vw-s img,.vw-s video{max-width:100%;max-height:100%;border-radius:24px;object-fit:contain;background:#fff;box-shadow:0 6px 0 #F6E3E8}
+.vw-s .nov{font-size:14px;font-weight:800;color:var(--sub);text-align:center;line-height:1.7;background:#fff;border-radius:24px;padding:24px}
+.vw-info{flex:none;max-height:42%;overflow-y:auto;background:#fff;border-radius:30px 30px 0 0;padding:18px 22px 30px;box-shadow:0 -6px 24px -12px rgba(140,60,90,.25)}
+.vw-info h4{font-size:17px;font-weight:900;margin-bottom:8px;line-height:1.4}
+.vw-info .meta{display:flex;gap:6px;flex-wrap:wrap}
+.vw-info .submit{margin-top:14px;padding:14px}
+.vw-nav{position:absolute;top:50%;width:40px;height:40px;border-radius:50%;background:#fff;box-shadow:var(--sh);font-size:18px;font-weight:900;display:none;place-items:center;z-index:2}
+@media (hover:hover){.vw-nav{display:grid}}
+@media (max-width:520px){.vw-top{padding-top:calc(env(safe-area-inset-top) + 8px)}.vw-info{padding-bottom:calc(env(safe-area-inset-bottom) + 18px)}}
 </style>
 </head>
 <body>
@@ -302,6 +343,7 @@ svg{display:block}
   </nav>
   <div class="mask" id="mask" onclick="closeSheet()"></div>
   <div class="sheet" id="sheet"></div>
+  <div class="vw" id="vw"></div>
   <div class="toast" id="toast"></div>
 </div>
 
@@ -370,7 +412,8 @@ function save(push=true){
 }
 
 /* 照片原图存 IndexedDB */
-let db,photoCache={};
+let db,photoCache={},vidCache={};
+const VMAX=50*1024*1024; // Supabase 免费版单个文件上限 50MB
 function openDB(){return new Promise(res=>{try{const r=indexedDB.open('liuyue',1);r.onupgradeneeded=()=>r.result.createObjectStore('photos');r.onsuccess=()=>{db=r.result;res()};r.onerror=()=>res()}catch(e){res()}})}
 function dbAll(){return new Promise(res=>{if(!db)return res({});const out={},q=db.transaction('photos').objectStore('photos').openCursor();q.onsuccess=e=>{const c=e.target.result;if(c){out[c.key]=c.value;c.continue()}else res(out)};q.onerror=()=>res(out)})}
 function dbPut(k,v){return new Promise(res=>{if(!db)return res();const t=db.transaction('photos','readwrite');t.objectStore('photos').put(v,k);t.oncomplete=res;t.onerror=res})}
@@ -397,7 +440,9 @@ const heart=(s=12,c='#fff')=>`<svg width="${s}" height="${s}" viewBox="0 0 24 24
 const play=`<svg width="10" height="10" viewBox="0 0 10 10" fill="#fff"><path d="M2 1l7 4-7 4z"/></svg>`;
 function openXhs(id){location.href=`xhsdiscover://item/${id}`}
 
-function allPhotos(){return [...xhsPhotos,...live(S.photos).map(p=>({...p,mine:true}))]}
+function allPhotos(){return [...xhsPhotos,...live(S.photos).filter(p=>!p.att).map(p=>({...p,mine:true}))]}
+function media(id){const p=S.photos.find(x=>x.id===id&&!x.del);return p?{...p,mine:true}:null}
+const picsOf=it=>(it&&it.pics||[]).map(media).filter(Boolean);
 function photoSrc(p){return p.src||photoCache[p.id]||'assets/liuyue.jpg'}
 
 function careStatus(){
@@ -507,7 +552,7 @@ function renderHome(){
       <div style="font-size:12px;font-weight:800;opacity:.75;line-height:1.6">${watch.length?esc(watch[0].title):lastIll?`上次是 ${md(lastIll.date)}${esc(lastIll.title)}，已康复`:''}</div></div>
   </div>
   <div class="sec"><h3>${paw(18,'#FFD45E')} 狗生第一次</h3><button onclick="openForm('moment')">+ 记一个</button></div>
-  <div class="moments">${sortDesc(live(S.moments)).map(m=>`<div class="mo" onclick="${m.xhs?`openPhotoByNote('${m.xhs}')`:`editItem('moments','${m.id}')`}">${m.xhs?'<i>小红书</i>':''}<div class="e">${esc(m.e||'⭐')}</div><b>${esc(m.title)}</b><span>${ymd(m.date)} · ${ageText(m.date)}</span></div>`).join('')}</div>
+  <div class="moments">${sortDesc(live(S.moments)).map(m=>{const pc=picsOf(m);return `<div class="mo" onclick="${pc.length?`openPics('moments','${m.id}',0)`:m.xhs?`openPhotoByNote('${m.xhs}')`:`editItem('moments','${m.id}')`}">${m.xhs&&!pc.length?'<i>小红书</i>':''}${pc.length?`<img class="att" src="${photoSrc(pc[0])}" alt="">`:`<div class="e">${esc(m.e||'⭐')}</div>`}<b>${pc.length?esc(m.e||'⭐')+' ':''}${esc(m.title)}</b><span>${ymd(m.date)} · ${ageText(m.date)}${pc.length>1?` · ${pc.length} 张`:''}</span></div>`}).join('')}</div>
   <div class="sec"><h3>${paw(18,'#8CC2FF')} 最近的${esc(d.name)}</h3><button onclick="go('grow')">相册</button></div>
   <div class="strip">${recent.map(p=>`<div class="ph" onclick="openPhoto('${p.id}')"><div class="img"><img loading="lazy" src="${photoSrc(p)}" alt=""></div><p>${esc(p.caption)}</p><span>${ageText(p.date)}</span></div>`).join('')}</div>
   <div class="xhs-card" style="margin-top:14px" onclick="growFilter='xhs';renderGrow();go('grow')">
@@ -520,15 +565,15 @@ function renderHome(){
 let growFilter='all';
 const MCOL=['#FFD3DE','#FFF1C2','#DCEBFF','#DDF6EB','#EEE8FF','#FFE4DA'];
 function weightNear(s,maxDays=20){const t=P(s);let best=null;for(const w of live(S.weights)){if(!best||Math.abs(P(w.date)-t)<Math.abs(P(best.date)-t))best=w}return best&&Math.abs(P(best.date)-t)<=864e5*maxDays?best:null}
+function growList(){let list=allPhotos();if(growFilter==='xhs')list=list.filter(p=>p.note);else if(growFilter==='mine')list=list.filter(p=>p.mine);return list}
 function renderGrow(){
-  let list=allPhotos();
-  if(growFilter==='xhs')list=list.filter(p=>p.note);else if(growFilter==='mine')list=list.filter(p=>p.mine);
+  const list=growList();
   const g={};for(const p of list){const m=ageOf(p.date).m;(g[m]=g[m]||[]).push(p)}
   const groups=Object.entries(g).map(([m,ps])=>({m:+m,ps:ps.sort((a,b)=>P(b.date)-P(a.date))})).sort((a,b)=>b.m-a.m);
   const b=P(S.dog.birthday);
   document.getElementById('p-grow').innerHTML=`
   <div class="top"><div><small>${allPhotos().length} 个瞬间 · 按月龄排</small><h1>相册</h1></div>
-    <button class="iconbtn" onclick="openForm('photo')" style="font-size:22px">📷</button></div>
+    <button class="iconbtn" onclick="openForm('photo')" style="font-size:22px">📷${pending.length?`<i style="position:absolute;right:-4px;top:-4px;font-style:normal;font-size:11px;font-weight:900;background:var(--pink);color:#fff;border-radius:9px;padding:1px 6px">${pending.length}</i>`:''}</button></div>
   <div class="compare-entry" onclick="openCompare()">
     <div class="pair"><img src="${xhsById['6a508ae3000000001603de84'].src}"><img src="${xhsById['6aeff8e3000000000e026a3a'].src}"></div>
     <p>那时和现在<small>刚到家的小宝 → 现在，拖动对比</small></p></div>
@@ -539,26 +584,80 @@ function renderGrow(){
     const mo=sortAsc(live(S.moments)).filter(m=>P(m.date)>=start&&P(m.date)<=end);
     return `<div class="month">
     <div class="mhead"><div class="badge" style="--c:${MCOL[gr.m%6]}">${gr.m}<small>个月</small></div>
-      <div class="t"><b>${md(start)} – ${md(end)}</b><span>${gr.ps.length} 张${ws.length?` · ${kgText(ws[0].kg)}${ws.length>1?' → '+kgText(ws[ws.length-1].kg):''} kg`:''}</span></div>
+      <div class="t"><b>${md(start)} – ${md(end)}</b><span>${gr.ps.length} 个${ws.length?` · ${kgText(ws[0].kg)}${ws.length>1?' → '+kgText(ws[ws.length-1].kg):''} kg`:''}</span></div>
       <button onclick="openReport(${gr.m})">月报</button></div>
     ${mo.length?`<div class="mstones">${mo.map(m=>`<span>${esc(m.e||'⭐')} ${esc(m.title)}</span>`).join('')}</div>`:''}
-    <div class="grid">${gr.ps.map(p=>`<div class="tile" onclick="openPhoto('${p.id}')"><img loading="lazy" src="${photoSrc(p)}" alt="">${p.video?`<span class="v">${play}</span>`:''}${p.mine?'<span class="mine">我拍的</span>':''}${p.likes?`<span class="lk">${heart(9)}${p.likes}</span>`:''}</div>`).join('')}</div>
+    <div class="grid">${gr.ps.map(p=>`<div class="tile" onclick="openPhoto('${p.id}','grow')"><img loading="lazy" src="${photoSrc(p)}" alt="">${p.video?`<span class="v">${play}</span>`:''}${p.mine?'<span class="mine">我拍的</span>':''}${p.likes?`<span class="lk">${heart(9)}${p.likes}</span>`:''}</div>`).join('')}</div>
   </div>`}).join('')||'<div class="empty">还没有照片</div>'}`;
 }
 function findPhoto(id){return allPhotos().find(p=>p.id===id)}
 function openPhotoByNote(n){const p=xhsById[n];if(p)openPhoto(p.id)}
-function openPhoto(id){
-  const p=findPhoto(id);if(!p)return;
-  const w=weightNear(p.date),mo=live(S.moments).filter(m=>m.xhs&&m.xhs===p.note);
-  sheet(`<div class="viewer"><img src="${photoSrc(p)}" alt="">
-    <h4>${esc(p.caption)}</h4>
-    <div class="meta"><span class="chip" style="background:var(--pink2)">${ageText(p.date,true)}</span><span class="chip" style="background:var(--bg)">${ymd(p.date)}${p.note?' 发布':''}</span>${w?`<span class="chip" style="background:var(--mint2)">那时约 ${kgText(w.kg)} kg</span>`:''}${p.likes?`<span class="chip" style="background:#FFE3E7;color:#FF2442">${heart(10,'#FF2442')} ${p.likes}</span>`:''}${p.video?'<span class="chip" style="background:var(--sky2)">视频</span>':''}</div>
-    ${mo.map(m=>`<div class="chip" style="background:var(--sun2);margin-top:8px">${esc(m.e)} ${esc(m.title)}</div>`).join('')}
-    ${p.note?`<button class="submit" style="background:#FF2442;box-shadow:0 5px 0 #C4142E;margin-top:16px" onclick="openXhs('${p.note}')">在小红书 App 里打开</button>`:''}
-    ${p.mine?`<button class="submit light" onclick="if(confirm('删除这张照片？'))delPhoto('${p.id}')">删除</button>`:''}
-  </div>`);
+function openPhoto(id,scope){
+  const list=(scope==='grow'?growList():allPhotos()).sort((a,b)=>P(b.date)-P(a.date));
+  const i=list.findIndex(p=>p.id===id);if(i<0)return;
+  openViewer(list,i,photoInfo);
 }
-async function delPhoto(id){const p=S.photos.find(x=>x.id===id);if(p){p.del=true;p.u=now()}await dbDel(id);delete photoCache[id];save();closeSheet();renderAll();toast('已删除')}
+function photoInfo(p){
+  const w=weightNear(p.date),mo=live(S.moments).filter(m=>m.xhs&&m.xhs===p.note);
+  return `<h4>${esc(p.caption||'')}</h4>
+    <div class="meta"><span class="chip" style="background:var(--pink2)">${ageText(p.date,true)}</span><span class="chip" style="background:var(--bg)">${ymd(p.date)}${p.note?' 发布':''}</span>${w?`<span class="chip" style="background:var(--mint2)">那时约 ${kgText(w.kg)} kg</span>`:''}${p.likes?`<span class="chip" style="background:#FFE3E7;color:#FF2442">${heart(10,'#FF2442')} ${p.likes}</span>`:''}${p.video?`<span class="chip" style="background:var(--sky2)">视频${p.dur?' '+durText(p.dur):''}</span>`:''}</div>
+    ${mo.map(m=>`<div class="chip" style="background:var(--sun2);margin-top:8px">${esc(m.e)} ${esc(m.title)}</div>`).join('')}
+    ${p.note?`<button class="submit" style="background:#FF2442;box-shadow:0 5px 0 #C4142E" onclick="openXhs('${p.note}')">${p.video?'在小红书 App 里看视频':'在小红书 App 里打开'}</button>`:''}
+    ${p.mine?`<button class="submit light" onclick="if(confirm('删除这${p.video?'个视频':'张照片'}？'))delPhoto('${p.id}')">删除</button>`:''}`;
+}
+const durText=d=>{d=Math.round(d);return `${Math.floor(d/60)}:${String(d%60).padStart(2,'0')}`};
+const recName=(col,r)=>col==='care'?`${CARE[r.type].emoji} ${CARE[r.type].name}${r.product?' · '+r.product:''}`:col==='ill'?'🩺 '+r.title:`${r.e||'⭐'} ${r.title}`;
+function openPics(col,rid,i){
+  const r=S[col].find(x=>x.id===rid);if(!r)return;const list=picsOf(r);if(!list.length)return;
+  openViewer(list,i,()=>`<h4>${esc(recName(col,r))}</h4><div class="meta"><span class="chip" style="background:var(--pink2)">${ageText(r.date,true)}</span><span class="chip" style="background:var(--bg)">${ymd(r.date)}</span><span class="chip" style="background:var(--bg)">${list.length} 张</span></div>
+    ${r.note?`<div style="font-size:13px;color:#6E5C6B;font-weight:600;line-height:1.65;margin-top:10px">${esc(r.note)}</div>`:''}
+    <button class="submit light" onclick="closeViewer();editItem('${col}','${rid}')">编辑这条记录</button>`);
+}
+function attRow(col,r){const pc=picsOf(r);return pc.length?`<div class="attrow">${pc.map((p,k)=>`<img loading="lazy" src="${photoSrc(p)}" onclick="event.stopPropagation();openPics('${col}','${r.id}',${k})" alt="">`).join('')}</div>`:''}
+function attMini(col,r){const pc=picsOf(r);return pc.length?`<div class="mini-att">${pc.slice(0,3).map((p,k)=>`<img src="${photoSrc(p)}" onclick="event.stopPropagation();openPics('${col}','${r.id}',${k})" alt="">`).join('')}${pc.length>3?`<small style="font-size:11px;font-weight:900;color:var(--sub);margin-left:4px">+${pc.length-3}</small>`:''}</div>`:''}
+
+/* 左右滑动看照片 */
+let VW={items:[],i:0,info:null};
+const vidURLs={};
+function openViewer(items,i,info){
+  VW={items,i:-1,info};
+  const el=document.getElementById('vw');
+  el.innerHTML=`<div class="vw-top"><button onclick="closeViewer()" aria-label="关闭">✕</button><span id="vwIdx"></span><span style="width:42px"></span></div>
+    <div style="flex:1;min-height:0;position:relative;display:flex">
+      <div class="vw-track" id="vwTrack">${items.map((_,k)=>`<div class="vw-s" data-k="${k}"></div>`).join('')}</div>
+      <button class="vw-nav" style="left:8px;transform:translateY(-50%)" onclick="vwGo(-1)">‹</button><button class="vw-nav" style="right:8px;transform:translateY(-50%)" onclick="vwGo(1)">›</button>
+    </div>
+    <div class="vw-info" id="vwInfo"></div>`;
+  el.classList.add('on');
+  const tr=document.getElementById('vwTrack');
+  tr.scrollLeft=i*tr.clientWidth;vwShow(i);
+  requestAnimationFrame(()=>{tr.scrollLeft=i*tr.clientWidth});
+  let t;tr.onscroll=()=>{clearTimeout(t);t=setTimeout(()=>{const k=Math.round(tr.scrollLeft/tr.clientWidth);if(k!==VW.i)vwShow(k)},60)};
+}
+function vwGo(d){const tr=document.getElementById('vwTrack'),k=Math.max(0,Math.min(VW.items.length-1,VW.i+d));tr.scrollTo({left:k*tr.clientWidth,behavior:'smooth'})}
+function vwFill(k){
+  const s=document.querySelector(`#vwTrack [data-k="${k}"]`),p=VW.items[k];if(!s||!p||s.dataset.f)return;s.dataset.f=1;
+  if(p.mine&&p.video){
+    s.innerHTML=`<video playsinline controls preload="metadata" poster="${photoSrc(p)}"></video>`;
+    videoURL(p).then(u=>{if(u)s.querySelector('video').src=u;else s.innerHTML=`<div class="nov"><img src="${photoSrc(p)}" style="max-height:220px;margin:0 auto 12px;box-shadow:none">${p.big?'这个视频超过 50MB，只存在上传它的那台手机里':'视频还没同步到这台手机，联网后再看'}</div>`});
+  } else s.innerHTML=`<img src="${photoSrc(p)}" alt="">`;
+}
+function vwShow(k){
+  VW.i=k;for(let j=k-1;j<=k+2;j++)vwFill(j);
+  document.querySelectorAll('#vwTrack video').forEach(v=>{if(v.closest('.vw-s').dataset.k!=k)v.pause()});
+  document.getElementById('vwIdx').textContent=`${k+1} / ${VW.items.length}`;
+  document.getElementById('vwInfo').innerHTML=VW.info(VW.items[k]);
+}
+function closeViewer(){const el=document.getElementById('vw');el.querySelectorAll('video').forEach(v=>v.pause());el.classList.remove('on');setTimeout(()=>{if(!el.classList.contains('on'))el.innerHTML=''},300)}
+document.addEventListener('keydown',e=>{if(!document.getElementById('vw').classList.contains('on'))return;if(e.key==='ArrowLeft')vwGo(-1);else if(e.key==='ArrowRight')vwGo(1);else if(e.key==='Escape')closeViewer()});
+async function videoURL(p){
+  if(vidURLs[p.id])return vidURLs[p.id];
+  if(vidCache[p.id])return vidURLs[p.id]=URL.createObjectURL(vidCache[p.id]);
+  if(!p.cloud||p.big||!cloudReady())return null;
+  try{await ensureSession();const d=await api(`/storage/v1/object/sign/photos/${sess.user.id}/${p.id}.${p.vext}`,{method:'POST',body:{expiresIn:7200}});
+    return vidURLs[p.id]=cloudCfg.url.replace(/\/+$/,'')+'/storage/v1'+d.signedURL}catch(e){return null}
+}
+async function delPhoto(id){const p=S.photos.find(x=>x.id===id);if(p){p.del=true;p.u=now()}await dbDel(id);await dbDel(id+'#v');delete photoCache[id];delete vidCache[id];save();closeViewer();renderAll();toast('已删除')}
 function openCompare(){
   const a=xhsById['6a508ae3000000001603de84'],b=xhsById['6aeff8e3000000000e026a3a'];
   const wa=weightNear(a.date),wb=weightNear(b.date);
@@ -621,18 +720,18 @@ function renderHealth(){
   } else if(healthTab==='care'){
     const cs=careStatus();
     body=`<div class="care-grid">${cs.filter(c=>c.last).map(c=>{const w2=careWhen(c);const span=days(P(c.last.date),c.from)||1;const p=days(P(c.last.date),TODAY)/span;return `
-      <div class="care"><div class="ring">${ring(p,c.left<=7?'#FF6B4A':c.t.color)}<span>${c.over>0?'!':Math.max(0,c.left)}${c.over>0?'':'<small>天</small>'}</span></div>
+      <div class="care"><div class="ring">${ring(p,c.left<=7?'#FF6B4A':c.t.color,64)}<span class="${String(Math.max(0,c.left)).length>2?'s':''}">${c.over>0?'!':Math.max(0,c.left)}${c.over>0?'':'<small>天</small>'}</span></div>
         <button onclick="openForm('care','${c.k}')">记一次</button>
         <b>${c.t.emoji} ${c.t.name}</b><small><span style="color:${w2.col};font-weight:900">${w2.txt}</span><br>${rangeText(c)}<br>每 ${c.mn===c.mx?(c.mn>=365?'年':c.mn+' 天'):c.mn+'–'+c.mx+' 天'}一次</small></div>`}).join('')}</div>
     ${cs.some(c=>!c.last)?`<div class="sec"><h3>还没开始记的</h3></div><div class="pills">${cs.filter(c=>!c.last).map(c=>`<button onclick="openForm('care','${c.k}')">${c.t.emoji} ${c.t.name}</button>`).join('')}</div>`:''}
     <div class="sec"><h3>历史记录</h3><button onclick="openCycle()">周期设置</button></div>
-    <div class="card">${sortDesc(live(S.care)).map(c=>`<div class="row" onclick="editItem('care','${c.id}')"><div style="display:flex;gap:8px;align-items:center;min-width:0"><span style="font-size:18px">${CARE[c.type].emoji}</span><b>${CARE[c.type].name}</b><small style="color:var(--sub);font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${esc(c.product||'')}</small></div><span>${ymd(c.date)}</span></div>`).join('')}</div>`;
+    <div class="card">${sortDesc(live(S.care)).map(c=>`<div class="row" onclick="editItem('care','${c.id}')"><div style="display:flex;gap:8px;align-items:center;min-width:0"><span style="font-size:18px">${CARE[c.type].emoji}</span><b>${CARE[c.type].name}</b><small style="color:var(--sub);font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${esc(c.product||'')}</small></div><div style="display:flex;align-items:center;gap:10px;flex:none">${attMini('care',c)}<span style="color:var(--sub);font-size:13px">${ymd(c.date)}</span></div></div>`).join('')}</div>`;
   } else {
     body=`<button class="bigbtn" onclick="openSummary()">🩺 生成就医摘要</button>
     ${sortDesc(live(S.ill)).map(i=>{const d=P(i.date);const col=i.status==='观察中'?['#FFE4DA','#E9573A']:i.status==='已康复'?['#DDF6EB','#1E9E6A']:['#EEE8FF','#6E5BE0'];return `
       <div class="ill"><div class="date"><b>${d.getMonth()+1}/${d.getDate()}</b><span>${ageText(i.date)}</span></div>
       <div class="tx"><div style="display:flex;justify-content:space-between;gap:8px;align-items:flex-start"><b>${esc(i.title)}</b><span class="chip" style="background:${col[0]};color:${col[1]};flex:none">${esc(i.status)}</span></div><p>${esc(i.note)}</p>
-      <div style="display:flex;gap:14px">${i.xhs?`<a onclick="openXhs('${i.xhs}')">📕 小红书笔记</a>`:''}<a style="color:var(--sub)" onclick="editItem('ill','${i.id}')">编辑</a></div></div></div>`}).join('')}
+      ${attRow('ill',i)}<div style="display:flex;gap:14px">${i.xhs?`<a onclick="openXhs('${i.xhs}')">📕 小红书笔记</a>`:''}<a style="color:var(--sub)" onclick="editItem('ill','${i.id}')">编辑</a></div></div></div>`}).join('')}
     <button class="bigbtn light" onclick="openForm('ill')">+ 添加病历</button>`;
   }
   document.getElementById('p-health').innerHTML=`
@@ -746,6 +845,7 @@ function openForm(k,arg,item){
     <div class="field"><label>日期</label><input id="fDate" type="date" value="${it.date||today}"></div>
     <div class="field"><label>用的什么</label><div class="pills" id="prodP" style="margin-bottom:8px">${prodPills(pick.care)}</div><input id="fProd" placeholder="或者自己写" value="${esc(it.product||'')}"></div>
     <div class="field"><label>备注</label><input id="fNote" value="${esc(it.note||'')}"></div>
+    ${picsField(it)}
     <button class="submit" onclick="saveCare()">记下来</button>${del}`);
   } else if(k==='ill'){
     pick.status=it.status||'观察中';
@@ -754,11 +854,13 @@ function openForm(k,arg,item){
     <div class="field"><label>日期</label><input id="fDate" type="date" value="${it.date||today}"></div>
     <div class="field"><label>怎么处理的、用了什么药</label><textarea id="fNote">${esc(it.note||'')}</textarea></div>
     <div class="field"><label>状态</label><div class="pills">${['观察中','已康复','长期注意'].map(s=>`<button class="${s===pick.status?'on':''}" onclick="pickPill(this,'status','${s}')">${s}</button>`).join('')}</div></div>
+    ${picsField(it,'病历、药盒、化验单都可以拍下来')}
     <button class="submit" onclick="saveIll()">记下来</button>${del}`);
   } else if(k==='moment'){
     sheet(`<h3>狗生第一次</h3>
     <div class="field" style="margin-top:12px"><label>发生了什么</label><input id="fTitle" placeholder="比如：第一次游泳" value="${esc(it.title||'')}"></div>
     <div class="two"><div class="field"><label>日期</label><input id="fDate" type="date" value="${it.date||today}"></div><div class="field"><label>一个表情</label><input id="fE" value="${esc(it.e||'⭐')}"></div></div>
+    ${picsField(it)}
     <button class="submit" onclick="saveMoment()">记下来</button>${del}`);
   } else if(k==='measure'){
     const m=sortDesc(live(S.measures))[0]||{};
@@ -772,12 +874,32 @@ function openForm(k,arg,item){
     <div class="field"><label>备注</label><input id="fNote" value="${esc(it.note||'')}"></div>
     <button class="submit" onclick="saveAvoid()">记下来</button>${del}`);
   } else if(k==='photo'){
-    pending=[];
-    sheet(`<h3>放照片进来</h3><div class="hint">会读照片里的拍摄日期，算出${esc(S.dog.name)}那时几个月几天。可以一次选很多张。</div>
-    <label class="upload"><img src="assets/liuyue.jpg"><b>选择照片</b>从相册里挑，可以多选<input type="file" accept="image/*" multiple hidden onchange="handleFiles(this.files)"></label>
-    <div id="detList" style="margin-top:14px"></div>`);
+    sheet(`<h3>放照片和视频</h3><div class="hint">会读拍摄日期，算出${esc(S.dog.name)}那时几个月几天。可以一次选很多个，选完点最下面的按钮。</div>
+    <label class="upload" id="upBox"><img src="assets/liuyue.jpg"><b>选择照片或视频</b>从相册里挑，可以多选<input type="file" accept="image/*,video/*" multiple hidden onchange="handleFiles(this)"></label>
+    <div id="detList" style="margin-top:14px"></div><div class="stick" id="pendBar"></div>`);
+    if(pending.length){renderPending();toast(`上次选的 ${pending.length} 个还在`)}
   }
   editing=item||null;
+  if(document.getElementById('fPics'))renderFpics();
+}
+/* 记录里的照片：不限张数 */
+let fpics=[];
+function picsField(it,hint){fpics=picsOf(it).map(p=>({id:p.id}));return `<div class="field"><label>照片${hint?' · '+hint:'（可以放很多张）'}</label><div class="pics" id="fPics"></div></div>`}
+function renderFpics(){
+  const el=document.getElementById('fPics');if(!el)return;
+  el.innerHTML=fpics.map((p,i)=>`<div class="pt" onclick="viewFpics(${i})"><img src="${p.src||photoCache[p.id]||''}" alt=""><b onclick="event.stopPropagation();fpics.splice(${i},1);renderFpics()">×</b></div>`).join('')+
+    `<label class="pt add">＋<input type="file" accept="image/*" multiple hidden onchange="addFpics(this)"></label>`;
+}
+function viewFpics(i){openViewer(fpics.map(p=>({id:p.id||'',src:p.src||photoCache[p.id]})),i,()=>`<div class="hint" style="margin:0">删掉照片：回到表单点照片右上角的 ×</div>`)}
+async function addFpics(inp){
+  const files=[...inp.files];inp.value='';if(!files.length)return;toast(`正在处理 ${files.length} 张…`);
+  for(const f of files){try{fpics.push({src:await shrink(f)});renderFpics()}catch(e){toast(`${f.name} 打不开`)}}
+}
+async function commitPics(col,date){
+  const keep=new Set(fpics.filter(p=>p.id).map(p=>p.id)),ids=[];
+  if(editing)for(const id of editing.pics||[])if(!keep.has(id)){const m=S.photos.find(x=>x.id===id);if(m){m.del=true;m.u=now()}dbDel(id);delete photoCache[id]}
+  for(const p of fpics){if(p.id){ids.push(p.id);continue}const id=uid('a');await dbPut(id,p.src);photoCache[id]=p.src;S.photos.push({id,u:now(),date,att:col,caption:''});ids.push(id)}
+  return ids;
 }
 function pickPill(el,key,v){pick[key]=v;el.parentNode.querySelectorAll('button').forEach(b=>b.classList.remove('on'));el.classList.add('on')}
 function upsert(col,obj){
@@ -785,11 +907,11 @@ function upsert(col,obj){
   save();closeSheet();renderAll();
 }
 function editItem(col,id){const it=S[col].find(x=>x.id===id);if(!it)return;const map={weights:'weight',care:'care',ill:'ill',moments:'moment',measures:'measure',avoid:'avoid'};openForm(map[col],null,it)}
-function delItem(){if(!editing)return;editing.del=true;editing.u=now();save();closeSheet();renderAll();toast('已删除')}
+function delItem(){if(!editing)return;for(const id of editing.pics||[]){const m=S.photos.find(x=>x.id===id);if(m){m.del=true;m.u=now()}dbDel(id);delete photoCache[id]}editing.del=true;editing.u=now();save();closeSheet();renderAll();toast('已删除')}
 function saveWeight(){const kg=parseFloat(val('fKg'));if(!(kg>0&&kg<60))return toast('体重好像不太对');upsert('weights',{date:val('fDate'),kg:Math.round(kg*100)/100});toast('体重记好了')}
-function saveCare(){const t=pick.care;upsert('care',{type:t,date:val('fDate'),product:val('fProd'),note:val('fNote')});const c=careStatus().find(x=>x.k===t);toast(`下次${CARE[t].name}：${rangeText(c)}`)}
-function saveIll(){if(!val('fTitle'))return toast('写一下症状或诊断');upsert('ill',{date:val('fDate'),title:val('fTitle'),note:val('fNote'),status:pick.status});toast('病历存好了')}
-function saveMoment(){if(!val('fTitle'))return toast('写一下是什么第一次');upsert('moments',{date:val('fDate'),title:val('fTitle'),e:val('fE')||'⭐'});toast('记下来了')}
+async function saveCare(){const t=pick.care,o={type:t,date:val('fDate'),product:val('fProd'),note:val('fNote')};o.pics=await commitPics('care',o.date);upsert('care',o);const c=careStatus().find(x=>x.k===t);toast(`下次${CARE[t].name}：${rangeText(c)}`)}
+async function saveIll(){if(!val('fTitle'))return toast('写一下症状或诊断');const o={date:val('fDate'),title:val('fTitle'),note:val('fNote'),status:pick.status};o.pics=await commitPics('ill',o.date);upsert('ill',o);toast('病历存好了')}
+async function saveMoment(){if(!val('fTitle'))return toast('写一下是什么第一次');const o={date:val('fDate'),title:val('fTitle'),e:val('fE')||'⭐'};o.pics=await commitPics('moments',o.date);upsert('moments',o);toast('记下来了')}
 function saveMeasure(){const c=+val('fChest'),l=+val('fLen');if(!(c>0&&l>0))return toast('两个数都要填');upsert('measures',{date:val('fDate'),chest:c,length:l});toast('尺寸记好了')}
 function saveAvoid(){if(!val('fTitle'))return toast('写一下名称');upsert('avoid',{name:val('fTitle'),e:val('fE'),note:val('fNote')});toast('记好了')}
 
@@ -812,33 +934,79 @@ function nameDate(n){const m=n.match(/(20\d{2})[-_.]?(0[1-9]|1[0-2])[-_.]?(0[1-9
 function shrink(file){return new Promise((res,rej)=>{const url=URL.createObjectURL(file),im=new Image();
   im.onload=()=>{const c=document.createElement('canvas'),sc=Math.min(1,1200/Math.max(im.width,im.height));c.width=Math.round(im.width*sc);c.height=Math.round(im.height*sc);c.getContext('2d').drawImage(im,0,0,c.width,c.height);URL.revokeObjectURL(url);res(c.toDataURL('image/jpeg',.82))};
   im.onerror=()=>{URL.revokeObjectURL(url);rej()};im.src=url})}
-async function handleFiles(files){
-  const list=document.getElementById('detList');list.innerHTML='<div class="scanning">正在看照片是什么时候拍的…</div>';pending=[];
-  for(const f of files){let date=null,source='none';
-    try{date=exifDate(await f.slice(0,262144).arrayBuffer());if(date)source='exif'}catch(e){}
-    if(!date){date=nameDate(f.name);if(date)source='name'}
-    let src=null;try{src=await shrink(f)}catch(e){}
-    if(!src){toast(`${f.name} 打不开`);continue}
-    pending.push({src,date:date||fmt(TODAY),source,caption:''})}
-  pending.sort((a,b)=>P(a.date)-P(b.date));renderPending();
+/* 视频：读 mp4/mov 里 mvhd 的创建时间 */
+async function videoDate(f){
+  try{let off=0;const four=(v,o)=>String.fromCharCode(v.getUint8(o),v.getUint8(o+1),v.getUint8(o+2),v.getUint8(o+3));
+    for(let n=0;n<40&&off+8<=f.size;n++){
+      const h=new DataView(await f.slice(off,off+16).arrayBuffer());let len=h.getUint32(0),hd=8;const t=four(h,4);
+      if(len===1){len=Number(h.getBigUint64(8));hd=16}else if(len===0)len=f.size-off;
+      if(t==='moov'){const v=new DataView(await f.slice(off+hd,off+Math.min(len,8<<20)).arrayBuffer());let q=0;
+        while(q+16<=v.byteLength){const l=v.getUint32(q);if(four(v,q+4)==='mvhd'){const ver=v.getUint8(q+8),sec=ver===1?Number(v.getBigUint64(q+12)):v.getUint32(q+12);
+          if(!sec)return null;const d=new Date((sec-2082844800)*1000);return d.getFullYear()>1990?fmt(d):null}if(l<8)break;q+=l}return null}
+      if(len<8)break;off+=len}
+  }catch(e){}return null;
 }
-const SRC={exif:['照片信息里读到的','#DDF6EB','#1E9E6A'],name:['从文件名里读到的','#DCEBFF','#3E7FD6'],none:['没读到，请选一下日期','#FFE4DA','#E9573A']};
+function placeholderThumb(){const c=document.createElement('canvas');c.width=600;c.height=800;const g=c.getContext('2d');g.fillStyle='#FFD3DE';g.fillRect(0,0,600,800);g.fillStyle='#fff';g.beginPath();g.arc(300,400,90,0,7);g.fill();g.fillStyle='#FF8FAB';g.beginPath();g.moveTo(270,350);g.lineTo(350,400);g.lineTo(270,450);g.fill();return c.toDataURL('image/jpeg',.8)}
+function videoThumb(f){return new Promise(res=>{
+  const url=URL.createObjectURL(f),v=document.createElement('video');let done=false;
+  const fin=src=>{if(done)return;done=true;clearTimeout(to);const dur=isFinite(v.duration)?v.duration:0;try{v.pause()}catch(e){}v.removeAttribute('src');v.load();URL.revokeObjectURL(url);res({src:src||placeholderThumb(),dur})};
+  const grab=()=>{try{if(!v.videoWidth)return fin(null);const c=document.createElement('canvas'),sc=Math.min(1,900/Math.max(v.videoWidth,v.videoHeight));c.width=Math.round(v.videoWidth*sc);c.height=Math.round(v.videoHeight*sc);c.getContext('2d').drawImage(v,0,0,c.width,c.height);fin(c.toDataURL('image/jpeg',.8))}catch(e){fin(null)}};
+  const to=setTimeout(()=>fin(null),8000);
+  v.muted=true;v.playsInline=true;v.setAttribute('playsinline','');v.preload='auto';
+  v.onloadeddata=()=>{try{v.pause();v.currentTime=Math.min(.5,(v.duration||1)/3)}catch(e){grab()}};
+  v.onseeked=grab;v.onerror=()=>fin(null);
+  v.src=url;v.load();const pl=v.play();if(pl&&pl.catch)pl.catch(()=>{});
+})}
+const isVideo=f=>/^video\//.test(f.type)||/\.(mov|mp4|m4v|3gp|webm)$/i.test(f.name);
+let reading=0;
+async function handleFiles(inp){
+  const files=[...inp.files];inp.value='';if(!files.length)return;
+  reading+=files.length;let k=0;renderPending();
+  for(const f of files){k++;const st=document.getElementById('readSt');if(st)st.textContent=`正在读第 ${k} / ${files.length} 个…`;
+    let date=null,source='none';
+    if(isVideo(f)){
+      date=await videoDate(f);if(date)source='meta';
+      if(!date){date=nameDate(f.name);if(date)source='name'}
+      const th=await videoThumb(f);
+      pending.push({src:th.src,dur:th.dur,date:date||fmt(TODAY),source,caption:'',video:true,file:f,vmime:f.type||'video/mp4',vext:(f.name.match(/\.(\w{2,4})$/)||[,'mp4'])[1].toLowerCase(),size:f.size});
+    } else {
+      try{date=exifDate(await f.slice(0,262144).arrayBuffer());if(date)source='exif'}catch(e){}
+      if(!date){date=nameDate(f.name);if(date)source='name'}
+      let src=null;try{src=await shrink(f)}catch(e){}
+      if(!src){toast(`${f.name} 打不开`);reading--;continue}
+      pending.push({src,date:date||fmt(TODAY),source,caption:''});
+    }
+    reading--;
+  }
+  reading=0;pending.sort((a,b)=>P(a.date)-P(b.date));renderPending();renderGrow();
+}
+const SRC={exif:['照片信息里读到的','#DDF6EB','#1E9E6A'],meta:['视频信息里读到的','#DDF6EB','#1E9E6A'],name:['从文件名里读到的','#DCEBFF','#3E7FD6'],none:['没读到，请选一下日期','#FFE4DA','#E9573A']};
 function renderPending(){
-  const list=document.getElementById('detList');if(!list)return;if(!pending.length){list.innerHTML='';return}
-  list.innerHTML=`<div style="font-size:13px;font-weight:800;margin:0 2px 10px">${pending.length} 张，${pending.filter(p=>p.source!=='none').length} 张认出了日期</div>`+
-  pending.map((p,i)=>{const s=SRC[p.source],a=ageOf(p.date),w=weightNear(p.date),d=P(p.date);
-    const warn=d>TODAY?'日期在未来，改一下吧':a.m<0?'那时还没出生，日期对吗？':d<P(S.dog.home)?'这是到家之前的照片':'';
-    return `<div class="det"><div class="th"><img src="${p.src}"></div><div class="bd">
+  const list=document.getElementById('detList'),bar=document.getElementById('pendBar'),box=document.getElementById('upBox');if(!list)return;
+  if(box){box.classList.toggle('slim',pending.length>0||reading>0);box.querySelector('b').textContent=pending.length?'继续添加':'选择照片或视频'}
+  const nv=pending.filter(p=>p.video).length,np=pending.length-nv;
+  bar.innerHTML=pending.length?`<button class="submit" onclick="savePending()" ${reading?'disabled style="opacity:.5"':''}>${paw(18,'#FFD45E')} 放进相册（${[np?np+' 张照片':'',nv?nv+' 个视频':''].filter(Boolean).join('、')}）</button>
+    <button class="clr" onclick="if(confirm('清空这次选的 ${pending.length} 个？')){pending=[];renderPending();renderGrow()}">清空重选</button>`:'';
+  const head=reading?`<div class="scanning" id="readSt">正在看是什么时候拍的…</div>`:pending.length?`<div style="font-size:13px;font-weight:800;margin:0 2px 10px">${pending.length} 个，${pending.filter(p=>p.source!=='none').length} 个认出了日期</div>`:'';
+  list.innerHTML=head+pending.map((p,i)=>{const s=SRC[p.source],a=ageOf(p.date),w=weightNear(p.date),d=P(p.date);
+    const warn=d>TODAY?'日期在未来，改一下吧':a.m<0?'那时还没出生，日期对吗？':p.video&&p.size>VMAX?`视频 ${Math.round(p.size/1048576)}MB，超过 50MB 不能传到云端，只存在这台手机`:d<P(S.dog.home)?'这是到家之前的照片':'';
+    return `<div class="det"><button class="rm" onclick="pending.splice(${i},1);renderPending();renderGrow()" aria-label="移除">×</button><div class="th"><img src="${p.src}">${p.video?`<i>${play}</i>`:''}</div><div class="bd">
       <span class="src" style="background:${s[1]};color:${s[2]}">${s[0]}</span>
       <div class="age">${ageText(p.date,true)}</div>
-      <div class="ex">${ymd(p.date)}${w?` · 那时约 ${kgText(w.kg)} kg`:''}</div>${warn?`<div class="warn">${warn}</div>`:''}
+      <div class="ex">${ymd(p.date)}${p.video&&p.dur?` · ${durText(p.dur)}`:''}${w?` · 约 ${kgText(w.kg)} kg`:''}</div>${warn?`<div class="warn">${warn}</div>`:''}
       <div class="ed"><input type="date" value="${p.date}" onchange="pending[${i}].date=this.value;renderPending()"></div>
       <div class="ed"><input placeholder="写一句（可不写）" value="${esc(p.caption)}" oninput="pending[${i}].caption=this.value"></div>
-    </div></div>`}).join('')+`<button class="submit" onclick="savePending()">放进相册</button>`;
+    </div></div>`}).join('');
 }
+let savingPend=false;
 async function savePending(){
-  for(const p of pending){const id=uid('p');await dbPut(id,p.src);photoCache[id]=p.src;S.photos.push({id,u:now(),date:p.date,caption:p.caption||'新的一天'})}
-  const n=pending.length;pending=[];save();closeSheet();growFilter='all';renderAll();go('grow');toast(`${n} 张照片已按月龄放好`);
+  if(savingPend||reading||!pending.length)return;savingPend=true;
+  try{for(const p of pending){const id=uid('p');await dbPut(id,p.src);photoCache[id]=p.src;
+      const rec={id,u:now(),date:p.date,caption:p.caption||'新的一天'};
+      if(p.video){await dbPut(id+'#v',p.file);vidCache[id]=p.file;Object.assign(rec,{video:true,vmime:p.vmime,vext:p.vext,dur:Math.round(p.dur||0)});if(p.size>VMAX)rec.big=true}
+      S.photos.push(rec)}
+    const n=pending.length;pending=[];save();closeSheet();growFilter='all';renderAll();go('grow');toast(`${n} 个已按月龄放好`);
+  }finally{savingPend=false}
 }
 
 /* ===== 云同步（Supabase） ===== */
@@ -876,8 +1044,16 @@ async function syncNow(){
     await ensureSession();const me=sess.user.id;
     const rows=await api(`/rest/v1/liuyue_docs?select=data&user_id=eq.${me}`);
     if(rows&&rows[0]&&rows[0].data)S=mergeState(S,rows[0].data);
-    for(const p of S.photos){if(!p.del&&!p.cloud&&photoCache[p.id]){
-      await api(`/storage/v1/object/photos/${me}/${p.id}.jpg`,{method:'POST',body:dataURLtoBlob(photoCache[p.id]),headers:{'x-upsert':'true','Content-Type':'image/jpeg'}});p.cloud=true;p.u=now()}}
+    for(const p of S.photos){if(p.del||p.cloud||!photoCache[p.id])continue;
+      if(p.video&&!p.big&&!vidCache[p.id])continue;
+      await api(`/storage/v1/object/photos/${me}/${p.id}.jpg`,{method:'POST',body:dataURLtoBlob(photoCache[p.id]),headers:{'x-upsert':'true','Content-Type':'image/jpeg'}});
+      if(p.video&&!p.big){const b=vidCache[p.id];
+        if(b.size>VMAX)p.big=true;
+        else try{await api(`/storage/v1/object/photos/${me}/${p.id}.${p.vext}`,{method:'POST',body:b,headers:{'x-upsert':'true','Content-Type':p.vmime||'video/mp4'}})}
+        catch(e){if(e.status===413||/size|large|exceed/i.test(e.message))p.big=true;else throw e}}
+      p.cloud=true;p.u=now()}
+    const gone=S.photos.filter(p=>p.del&&p.cloud&&!p.purged);
+    if(gone.length){try{await api('/storage/v1/object/photos',{method:'DELETE',body:{prefixes:gone.flatMap(p=>[`${me}/${p.id}.jpg`,...(p.video&&p.vext?[`${me}/${p.id}.${p.vext}`]:[])])}});gone.forEach(p=>{p.purged=true;p.u=now()})}catch(e){}}
     save(false);
     await api('/rest/v1/liuyue_docs',{method:'POST',body:{user_id:me,data:S,updated_at:new Date().toISOString()},headers:{Prefer:'resolution=merge-duplicates,return=minimal'}});
     setSync('ok');renderAll();pullPhotos();
@@ -932,7 +1108,7 @@ function refreshCloudUI(){
 
 /* ===== 框架 ===== */
 function sheet(html){const s=document.getElementById('sheet');s.innerHTML='<div class="grab"></div>'+html;s.scrollTop=0;s.classList.add('on');document.getElementById('mask').classList.add('on')}
-function closeSheet(){document.getElementById('sheet').classList.remove('on');document.getElementById('mask').classList.remove('on');editing=null}
+function closeSheet(){const s=document.getElementById('sheet'),wasPend=s.classList.contains('on')&&document.getElementById('detList')&&pending.length;s.classList.remove('on');document.getElementById('mask').classList.remove('on');editing=null;if(wasPend){renderGrow();toast(`选好的 ${pending.length} 个先留着，再点 📷 继续`)}}
 let tt;function toast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('on');clearTimeout(tt);tt=setTimeout(()=>t.classList.remove('on'),2400)}
 function go(p){document.querySelectorAll('.page').forEach(x=>x.classList.toggle('on',x.id==='p-'+p));document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('on',x.dataset.p===p));document.getElementById('screen').scrollTop=0}
 document.querySelectorAll('.tab').forEach(t=>t.onclick=()=>go(t.dataset.p));
@@ -947,7 +1123,7 @@ async function authFromLink(){
   try{const tok=h.get('access_token');const r=await fetch(cloudCfg.url+'/auth/v1/user',{headers:{apikey:cloudCfg.key,Authorization:'Bearer '+tok}});const u=await r.json();
     setSess({access_token:tok,refresh_token:h.get('refresh_token'),expires_in:+h.get('expires_in')||3600,user:u});toast('邮箱已确认，已经登录');}catch(e){toast('邮箱已确认，回到档案页登录一下')}
 }
-openDB().then(dbAll).then(async all=>{photoCache=all;renderAll();await authFromLink();syncNow()});
+openDB().then(dbAll).then(async all=>{for(const[k,v]of Object.entries(all)){if(k.endsWith('#v'))vidCache[k.slice(0,-2)]=v;else photoCache[k]=v}renderAll();await authFromLink();syncNow()});
 document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible')syncNow()});
 if('serviceWorker' in navigator&&location.protocol==='https:')navigator.serviceWorker.register('sw.js').catch(()=>{});
 </script>
