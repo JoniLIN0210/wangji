@@ -300,7 +300,7 @@ svg{display:block}
     <li><b style="background:var(--mint)"></b>体重曲线和病历，一键生成就医摘要</li>
     <li><b style="background:var(--pink)"></b>点一下首页的小狗试试</li>
   </ul>
-  <div class="phone-tip" id="phoneTip">手机和电脑连同一个 Wi-Fi，用手机浏览器打开<br><b id="lanUrl">http://192.168.71.129:8080</b></div>
+  <div class="phone-tip" id="phoneTip">用手机浏览器打开<br><b id="lanUrl">https://jonilin0210.github.io/wangji/</b><br>再点「分享 → 添加到主屏幕」</div>
 </div>
 
 <div class="phone">
@@ -413,8 +413,8 @@ function seed(){
     ]
   };
 }
-let S;
-try{S=JSON.parse(localStorage.getItem(KEY))||seed()}catch(e){S=seed()}
+let S, firstVisit=false;
+try{S=JSON.parse(localStorage.getItem(KEY));if(!S){S=seed();firstVisit=true}}catch(e){S=seed();firstVisit=true}
 const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){toast('保存失败，存储空间不够')}};
 
 /* 照片原图存 IndexedDB，容量比 localStorage 大很多 */
@@ -543,11 +543,11 @@ function renderHome(){
     <div class="mascot" onclick="petDog(this)">${dog({bg:'none',acc:'bow',live:true})}</div>
     <div class="hero-card">
       <h2>${esc(d.name)}</h2>
-      <div class="meta"><span>${esc(d.breed)}</span><span>${esc(d.gender)}</span><span>${ageText(m)}</span></div>
+      <div class="meta">${[d.breed,d.gender].filter(Boolean).map(x=>`<span>${esc(x)}</span>`).join('')}<span>${ageText(m)}</span></div>
       <div class="stats">
         <div><b class="num">${w?w.kg:'-'}<small>kg</small></b><span>现在体重</span></div>
         <div><b class="num">${homeDays}<small>天</small></b><span>来家里</span></div>
-        <div><b class="num">${Math.max(0,cs[0].left)}<small>天</small></b><span>后${cs[0].t.name.replace('体','')}</span></div>
+        <div><b class="num">${cs[0].last?Math.max(0,cs[0].left):'-'}<small>${cs[0].last?'天':''}</small></b><span>后${cs[0].t.name.replace('体','')}</span></div>
       </div>
     </div>
   </div>
@@ -711,6 +711,7 @@ function renderMe(){
     <div class="row" onclick="openDogEdit()"><span>修改狗狗资料</span>${ic('arrow','none',18,'#B0B4CB')}</div>
     <div class="row" onclick="exportData()"><span>导出备份（含照片）</span>${ic('download','none',18,'#B0B4CB')}</div>
     <label class="row" style="cursor:pointer"><span>从备份恢复</span>${ic('upload','none',18,'#B0B4CB')}<input type="file" accept=".json,application/json" hidden onchange="importData(this)"></label>
+    <div class="row" onclick="if(confirm('会清空现在所有的记录和照片，确定吗？'))startFresh()"><span>清空，开始记我的狗</span>${ic('arrow','none',18,'#B0B4CB')}</div>
     <div class="row" onclick="if(confirm('会清空你自己记的数据和照片，确定吗？'))resetData()"><span>恢复示例数据</span>${ic('arrow','none',18,'#B0B4CB')}</div>
   </div>`;
 }
@@ -735,6 +736,7 @@ function importData(inp){
 /* ================= 纪念卡 ================= */
 function openCard(){
   const a=nextAnniv(), ps=sortDesc(S.photos), ws=[...S.weights].sort((x,y)=>P(x.date)-P(y.date));
+  if(!ps.length) return toast('先放几张照片进相册吧');
   sheet(`<h3>纪念卡</h3><div class="hint">截图就能分享</div>
   <div style="border-radius:28px;overflow:hidden;background:var(--yellow);padding:16px;position:relative">
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">${[ps[ps.length-1],ps[0]].map((p,i)=>`<div style="height:150px;border-radius:18px;overflow:hidden;border:4px solid #fff;transform:rotate(${i?3:-3}deg)">${photoHTML(p)}</div>`).join('')}</div>
@@ -889,7 +891,18 @@ document.getElementById('logoDog').innerHTML=dog({bg:'#FFDB5C',acc:'bow'});
 if(location.protocol.startsWith('http')&&!['localhost','127.0.0.1'].includes(location.hostname)) document.getElementById('lanUrl').textContent=location.origin;
 if('serviceWorker' in navigator&&window.isSecureContext&&location.protocol==='https:') navigator.serviceWorker.register('sw.js').catch(()=>{});
 renderAll();
-openDB().then(dbAll).then(all=>{photoCache=all;renderAll()});
+openDB().then(dbAll).then(all=>{photoCache=all;renderAll();if(firstVisit)welcome()});
+function welcome(){
+  sheet(`<div style="width:150px;height:150px;margin:0 auto">${dog({bg:'none',acc:'bow',live:true})}</div>
+  <h3 style="text-align:center">欢迎来到汪记</h3><div class="hint" style="text-align:center">现在显示的是示例狗狗「团子」。记录只存在这台手机上，不会上传。</div>
+  <button class="submit" onclick="startFresh()">开始记我的狗</button>
+  <button class="submit" style="background:var(--bg);color:var(--ink);box-shadow:0 5px 0 #E3E6F5;margin-top:12px" onclick="save();closeSheet()">先看看示例</button>`);
+}
+async function startFresh(){
+  await dbClear();photoCache={};
+  S={dog:{name:'我的狗狗',breed:'',gender:'',birthday:fmt(addDays(TODAY,-90)),home:fmt(TODAY),chip:'',neuter:'',allergy:'',blood:'',hospital:'',meds:''},weights:[],care:[],ill:[],photos:[]};
+  save();renderAll();go('me');openDogEdit();
+}
 </script>
 </body>
 </html>
