@@ -896,7 +896,7 @@ async function signIn(){
 }
 async function signUp(){
   const email=val('cEmail'),pw=val('cPw');if(!email||pw.length<6)return toast('填邮箱和至少 6 位密码');
-  try{setSync('busy');const d=await api('/auth/v1/signup',{method:'POST',body:{email,password:pw},anon:true});
+  try{setSync('busy');const back=encodeURIComponent(location.origin+location.pathname);const d=await api('/auth/v1/signup?redirect_to='+back,{method:'POST',body:{email,password:pw},anon:true});
     if(d&&d.access_token){setSess(d);toast('注册成功，正在上传');await syncNow()}else setSync('off','确认邮件已发出：去邮箱点确认链接，再回来点「登录」')}
   catch(e){setSync('err',e.message)}
 }
