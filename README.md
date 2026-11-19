@@ -1,7 +1,10 @@
-# 汪记 Wangji
+# 六月的小本子
 
-A cute puppy growth journal: weight, deworming and vaccine reminders, vet history, and a photo album that reads each photo's capture date to work out how old the dog was.
+A growth journal for 六月, a long-tailed cream corgi born 2026-03-23 and home since 2026-06-27.
 
-Single-file web app. All data stays on your own device (localStorage + IndexedDB). Open it on a phone and add it to the home screen.
+- Weight curve, deworming / vaccine reminders with her own cycles, vet history, measurements, foods to avoid
+- Album sorted by age in months, including the 71 notes from the Xiaohongshu account 明媚的六月
+- Reads each uploaded photo's capture date to work out how old she was
+- Optional cloud sync through Supabase (run `supabase-setup.sql` once, then sign in inside the app)
 
 Live: https://jonilin0210.github.io/wangji/
