@@ -842,8 +842,8 @@ async function savePending(){
 }
 
 /* ===== 云同步（Supabase） ===== */
-// 建好 Supabase 项目后，把 Project URL 和 anon public key 填在这里，之后每台手机只需要登录
-const CLOUD_DEFAULT={url:'',key:''};
+// Supabase 项目 liuyue（新加坡）。publishable key 本来就是给前端用的；表和照片都开了行级权限，只有登录的本人能读写
+const CLOUD_DEFAULT={url:'https://brskltiyfsbaygxujyaz.supabase.co',key:'sb_publishable_HMVyLqON7T2vDDSzB2BXXA_DbuUP14H'};
 let cloudCfg=JSON.parse(localStorage.getItem('liuyue-cloud')||'null')||CLOUD_DEFAULT;
 let sess=JSON.parse(localStorage.getItem('liuyue-sess')||'null');
 let syncState={s:'off',msg:'',at:+localStorage.getItem('liuyue-lastsync')||0},syncing=false;
@@ -868,7 +868,8 @@ function mergeState(a,b){
   for(const k of ['dog','careCfg'])out[k]=((b[k]&&b[k].u)||0)>((a[k]&&a[k].u)||0)?b[k]:a[k];
   return out;
 }
-function setSync(s,msg=''){syncState.s=s;syncState.msg=msg;if(s==='ok'){syncState.at=now();localStorage.setItem('liuyue-lastsync',syncState.at)}refreshCloudUI()}
+const ERR_CN=[[/invalid login/i,'邮箱或密码不对'],[/not confirmed|confirm/i,'邮箱还没确认：去邮箱点一下确认链接再登录'],[/already registered|already exists/i,'这个邮箱已经注册过了，直接点「登录」'],[/rate limit|too many/i,'操作太频繁，过一会儿再试'],[/failed to fetch|network/i,'连不上云端，检查一下网络'],[/password.*(short|least)/i,'密码至少 6 位'],[/email.*invalid|invalid.*email/i,'邮箱格式不对']];
+function setSync(s,msg=''){for(const[r,t]of ERR_CN)if(msg&&r.test(msg)){msg=t;break}syncState.s=s;syncState.msg=msg;if(s==='ok'){syncState.at=now();localStorage.setItem('liuyue-lastsync',syncState.at)}refreshCloudUI()}
 async function syncNow(){
   if(!cloudReady()||syncing)return;syncing=true;setSync('busy');
   try{
