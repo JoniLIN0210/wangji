@@ -587,7 +587,7 @@ function renderGrow(){
       <div class="t"><b>${md(start)} – ${md(end)}</b><span>${gr.ps.length} 个${ws.length?` · ${kgText(ws[0].kg)}${ws.length>1?' → '+kgText(ws[ws.length-1].kg):''} kg`:''}</span></div>
       <button onclick="openReport(${gr.m})">月报</button></div>
     ${mo.length?`<div class="mstones">${mo.map(m=>`<span>${esc(m.e||'⭐')} ${esc(m.title)}</span>`).join('')}</div>`:''}
-    <div class="grid">${gr.ps.map(p=>`<div class="tile" onclick="openPhoto('${p.id}','grow')"><img loading="lazy" src="${photoSrc(p)}" alt="">${p.video?`<span class="v">${play}</span>`:''}${p.mine?(UNSURE.includes(p.ds)?'<span class="mine" style="background:#FFE4DA;color:#E9573A">日期待确认</span>':'<span class="mine">我拍的</span>'):''}${p.likes?`<span class="lk">${heart(9)}${p.likes}</span>`:''}</div>`).join('')}</div>
+    <div class="grid">${gr.ps.map(p=>`<div class="tile" onclick="openPhoto('${p.id}','grow')"><img loading="lazy" src="${photoSrc(p)}" alt="">${p.video?`<span class="v">${play}</span>`:''}${p.mine?(isUnsure(p)?'<span class="mine" style="background:#FFE4DA;color:#E9573A">日期待确认</span>':'<span class="mine">我拍的</span>'):''}${p.likes?`<span class="lk">${heart(9)}${p.likes}</span>`:''}</div>`).join('')}</div>
   </div>`}).join('')||'<div class="empty">还没有照片</div>'}`;
 }
 function findPhoto(id){return allPhotos().find(p=>p.id===id)}
@@ -603,11 +603,13 @@ function photoInfo(p){
     <div class="meta"><span class="chip" style="background:var(--pink2)">${ageText(p.date,true)}</span><span class="chip" style="background:var(--bg)">${ymd(p.date)}${p.note?' 发布':''}</span>${w?`<span class="chip" style="background:var(--mint2)">那时约 ${kgText(w.kg)} kg</span>`:''}${p.likes?`<span class="chip" style="background:#FFE3E7;color:#FF2442">${heart(10,'#FF2442')} ${p.likes}</span>`:''}${p.video?`<span class="chip" style="background:var(--sky2)">视频${p.dur?' '+durText(p.dur):''}</span>`:''}</div>
     ${mo.map(m=>`<div class="chip" style="background:var(--sun2);margin-top:8px">${esc(m.e)} ${esc(m.title)}</div>`).join('')}
     ${p.note?`<button class="submit" style="background:#FF2442;box-shadow:0 5px 0 #C4142E" onclick="openXhs('${p.note}')">${p.video?'在小红书 App 里看视频':'在小红书 App 里打开'}</button>`:''}
-    ${p.mine&&!p.att&&p.id?`<div class="row" style="margin-top:12px;border:0;padding:0"><span>${DS_TXT[p.ds]||'拍摄日期'}</span><input type="date" value="${p.date}" onchange="setPhotoDate('${p.id}',this.value)" style="border:0;background:var(--bg);border-radius:12px;padding:9px 10px;font:inherit;font-weight:800;font-size:16px;color:var(--ink)"></div>`:''}
+    ${p.mine&&!p.att&&p.id?`<div class="row" style="margin-top:12px;border:0;padding:0"><span>${isUnsure(p)&&!p.ds?'⚠️ 可能没认出日期，核对一下':DS_TXT[p.ds]||'拍摄日期'}</span><input type="date" value="${p.date}" onchange="setPhotoDate('${p.id}',this.value)" style="border:0;background:var(--bg);border-radius:12px;padding:9px 10px;font:inherit;font-weight:800;font-size:16px;color:var(--ink)"></div>`:''}
     ${p.mine&&p.id?`<button class="submit light" onclick="if(confirm('删除这${p.video?'个视频':'张照片'}？'))delPhoto('${p.id}')">删除</button>`:''}`;
 }
 const DS_TXT={none:'⚠️ 没认出日期，改一下',file:'按文件时间推测，可以改',mvhd:'按视频文件时间，可以改',manual:'拍摄日期（改过）',exif:'拍摄日期',meta:'拍摄日期',apple:'拍摄日期',name:'从文件名认的日期'};
 const UNSURE=['none','file','mvhd'];
+const addedOn=p=>{const t=parseInt(String(p.id).slice(2,-4),36);return t>1.7e12&&t<4e12?fmt(new Date(t)):null};
+const isUnsure=p=>p.mine&&!p.att&&(UNSURE.includes(p.ds)||(!p.ds&&p.date===addedOn(p)));
 function setPhotoDate(id,v){if(!v)return;const r=S.photos.find(x=>x.id===id);if(!r)return;r.date=v;r.ds='manual';r.u=now();save();
   const it=VW.items[VW.i];if(it&&it.id===id){it.date=v;it.ds='manual';document.getElementById('vwInfo').innerHTML=VW.info(it)}
   renderHome();renderGrow();toast(`改好了：${ageText(v,true)}`)}
