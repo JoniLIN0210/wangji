@@ -587,7 +587,7 @@ function renderGrow(){
       <div class="t"><b>${md(start)} – ${md(end)}</b><span>${gr.ps.length} 个${ws.length?` · ${kgText(ws[0].kg)}${ws.length>1?' → '+kgText(ws[ws.length-1].kg):''} kg`:''}</span></div>
       <button onclick="openReport(${gr.m})">月报</button></div>
     ${mo.length?`<div class="mstones">${mo.map(m=>`<span>${esc(m.e||'⭐')} ${esc(m.title)}</span>`).join('')}</div>`:''}
-    <div class="grid">${gr.ps.map(p=>`<div class="tile" onclick="openPhoto('${p.id}','grow')"><img loading="lazy" src="${photoSrc(p)}" alt="">${p.video?`<span class="v">${play}</span>`:''}${p.mine?(isUnsure(p)?'<span class="mine" style="background:#FFE4DA;color:#E9573A">日期待确认</span>':'<span class="mine">我拍的</span>'):''}${p.likes?`<span class="lk">${heart(9)}${p.likes}</span>`:''}</div>`).join('')}</div>
+    <div class="grid">${gr.ps.map(p=>`<div class="tile" onclick="openPhoto('${p.id}','grow')"><img loading="lazy" src="${photoSrc(p)}" alt="">${p.video?`<span class="v">${play}</span>`:''}${isUnsure(p)?'<span class="mine" style="background:#FFE4DA;color:#E9573A">日期待确认</span>':''}${p.likes?`<span class="lk">${heart(9)}${p.likes}</span>`:''}</div>`).join('')}</div>
   </div>`}).join('')||'<div class="empty">还没有照片</div>'}`;
 }
 function findPhoto(id){return allPhotos().find(p=>p.id===id)}
