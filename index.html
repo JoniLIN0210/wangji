@@ -299,6 +299,37 @@ svg{display:block}
 .mini-att img:first-child{margin-left:0}
 .mo .att{width:100%;height:64px;border-radius:14px;object-fit:cover;margin-bottom:8px}
 
+.foodbar{display:flex;align-items:center;gap:10px;background:#fff;border-radius:22px;padding:13px 14px;box-shadow:var(--sh);cursor:pointer;margin-top:14px}
+.foodbar .q{flex:1;color:var(--sub);font-size:14px;font-weight:800}
+.foodbar .tags{display:flex;gap:4px}
+.foodbar .tags em{font-style:normal;font-size:11px;font-weight:900;padding:4px 7px;border-radius:9px}
+.fsearch{display:flex;align-items:center;gap:8px;background:var(--bg);border-radius:18px;padding:4px 14px;margin-bottom:12px}
+.fsearch input{flex:1;border:0;background:none;outline:none;font-size:16px;font-weight:700;padding:10px 0;min-width:0}
+.fchips{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;margin:0 -22px 8px;padding:0 22px}
+.fchips::-webkit-scrollbar{display:none}
+.fchips button{flex:none;padding:8px 12px;border-radius:13px;background:var(--bg);font-size:13px;font-weight:800;color:var(--fc,var(--ink))}
+.fchips button.on{background:var(--ink);color:#fff}
+.fchips.sm button{padding:6px 10px;font-size:12px}
+.fsos{background:#FFE4DA;color:#9A3412;border-radius:18px;padding:12px 14px;font-size:12.5px;font-weight:700;line-height:1.65;margin:6px 0 12px}
+.fcount{font-size:12px;font-weight:800;color:var(--sub);margin:0 2px 8px}
+.food{background:#fff;border:2px solid var(--line);border-radius:20px;padding:12px;margin-bottom:8px;cursor:pointer}
+.food.open{border-color:#F2D2DB}
+.food .fh{display:flex;align-items:center;gap:10px}
+.food .fh i{font-style:normal;font-size:26px;width:36px;text-align:center;flex:none}
+.food .ft{flex:1;min-width:0}
+.food .ft b{display:block;font-size:15px;font-weight:900}
+.food .ft span{display:block;font-size:12px;color:#6E5C6B;font-weight:700;line-height:1.5;margin-top:2px}
+.food .fh em{font-style:normal;font-size:11px;font-weight:900;padding:4px 8px;border-radius:9px;flex:none;align-self:flex-start}
+.food .fmine{font-size:12px;font-weight:900;color:#E9573A;margin:8px 0 0 46px}
+.food .fd{margin:10px 0 0 46px}
+.food .fd p{font-size:13px;line-height:1.75;font-weight:600;color:var(--ink)}
+.fsrc{font-size:11.5px;font-weight:700;color:var(--sub);line-height:1.7;margin-top:8px}
+.fsrc a,.fsrcs a{color:#3E7FD6;text-decoration:none}
+.fsrcs{display:flex;flex-direction:column;gap:8px;font-size:12.5px;font-weight:700}
+.ftip{background:var(--bg);border-radius:18px;padding:12px 14px;margin-bottom:8px}
+.ftip b{font-size:14px;font-weight:900}
+.ftip p{font-size:13px;font-weight:600;line-height:1.7;margin-top:4px}
+.fempty{text-align:center;color:var(--sub);font-weight:800;font-size:14px;line-height:1.8;padding:24px 0}
 .vw{position:absolute;inset:0;z-index:70;background-color:var(--bg);background-image:radial-gradient(#FBE3E9 1.6px,transparent 1.6px);background-size:22px 22px;display:flex;flex-direction:column;opacity:0;pointer-events:none;transform:scale(.97);transition:opacity .25s,transform .3s cubic-bezier(.2,1.1,.3,1)}
 .vw.on{opacity:1;pointer-events:auto;transform:none}
 .vw-top{display:flex;align-items:center;justify-content:space-between;padding:56px 18px 10px;flex:none}
@@ -551,6 +582,7 @@ function renderHome(){
       <div class="val" style="font-size:21px;margin-top:8px">${watch.length?'有 '+watch.length+' 项在观察':'一切都好'}</div>
       <div style="font-size:12px;font-weight:800;opacity:.75;line-height:1.6">${watch.length?esc(watch[0].title):lastIll?`上次是 ${md(lastIll.date)}${esc(lastIll.title)}，已康复`:''}</div></div>
   </div>
+  <div class="foodbar" onclick="openFood('')"><span style="font-size:22px">🍽️</span><span class="q">能给${esc(d.name)}吃吗？查一下</span><span class="tags"><em style="background:#FFE1E1;color:#E5484D">${FOOD.filter(f=>f[0]==='no').length} 不能</em><em style="background:#DDF6EB;color:#1E9E6A">${FOOD.filter(f=>f[0]==='ok').length} 可以</em></span></div>
   <div class="sec"><h3>${paw(18,'#FFD45E')} 狗生第一次</h3><button onclick="openForm('moment')">+ 记一个</button></div>
   <div class="moments">${sortDesc(live(S.moments)).map(m=>{const pc=picsOf(m);return `<div class="mo" onclick="${pc.length?`openPics('moments','${m.id}',0)`:m.xhs?`openPhotoByNote('${m.xhs}')`:`editItem('moments','${m.id}')`}">${m.xhs&&!pc.length?'<i>小红书</i>':''}${pc.length?`<img class="att" src="${photoSrc(pc[0])}" alt="">`:`<div class="e">${esc(m.e||'⭐')}</div>`}<b>${pc.length?esc(m.e||'⭐')+' ':''}${esc(m.title)}</b><span>${ymd(m.date)} · ${ageText(m.date)}${pc.length>1?` · ${pc.length} 张`:''}</span></div>`}).join('')}</div>
   <div class="sec"><h3>${paw(18,'#8CC2FF')} 最近的${esc(d.name)}</h3><button onclick="go('grow')">相册</button></div>
@@ -776,6 +808,134 @@ function copyText(t,msg){
   function fb(){const ta=document.createElement('textarea');ta.value=t;document.body.appendChild(ta);ta.select();try{document.execCommand('copy')}catch(e){}ta.remove();done()}
 }
 
+/* ===== 能不能吃：资料来自 ASPCA、默克兽医手册、美国 FDA、AKC、WSAVA、宠物中毒求助热线（2026.11 核对） ===== */
+const FSRC={
+  aspca:['ASPCA 动物中毒控制中心：不要喂宠物的人类食物','https://www.aspca.org/pet-care/animal-poison-control/people-foods-avoid-feeding-your-pets'],
+  merck:['默克兽医手册：食物危害','https://www.merckvetmanual.com/special-pet-topics/poisoning/food-hazards'],
+  mChoc:['默克兽医手册：巧克力中毒','https://www.merckvetmanual.com/toxicology/food-hazards/chocolate-toxicosis-in-animals'],
+  mXyl:['默克兽医手册：犬木糖醇中毒','https://www.merckvetmanual.com/toxicology/food-hazards/xylitol-toxicosis-in-dogs'],
+  mAll:['默克兽医手册：洋葱大蒜类中毒','https://www.merckvetmanual.com/toxicology/food-hazards/garlic-and-onion-allium-spp-toxicosis-in-animals'],
+  akc:['美国养犬俱乐部 AKC：狗能吃和不能吃的人类食物','https://www.akc.org/expert-advice/nutrition/human-foods-dogs-can-and-cant-eat/'],
+  akcFV:['AKC：狗能吃和不能吃的水果蔬菜','https://www.akc.org/expert-advice/nutrition/fruits-vegetables-dogs-can-and-cant-eat/'],
+  akcRice:['AKC：狗能吃米饭吗','https://www.akc.org/expert-advice/nutrition/can-dogs-eat-rice/'],
+  akcSP:['AKC：狗能吃红薯吗','https://www.akc.org/expert-advice/nutrition/can-dogs-eat-sweet-potatoes/'],
+  akcPot:['AKC：狗能吃土豆吗','https://www.akc.org/expert-advice/nutrition/can-dogs-eat-potatoes/'],
+  akcChk:['AKC：狗能吃鸡肉吗','https://www.akc.org/expert-advice/nutrition/can-dogs-eat-chicken/'],
+  akcBeef:['AKC：狗能吃汉堡肉吗（牛肉等熟肉）','https://www.akc.org/expert-advice/nutrition/can-dogs-eat-hamburger/'],
+  fdaBone:['美国 FDA：节日里的宠物安全（骨头的危害）','https://www.fda.gov/animal-veterinary/animal-health-literacy/take-oh-no-out-your-and-your-pets-holiday-ho-ho-ho'],
+  fdaRaw:['美国 FDA：生食宠物粮的风险','https://www.fda.gov/animal-veterinary/animal-health-literacy/get-facts-raw-pet-food-diets-can-be-dangerous-you-and-your-pet'],
+  wsava:['世界小动物兽医协会 WSAVA：给狗吃零食','https://wsava.org/wp-content/uploads/2024/06/Feeding-treats-to-your-dog-v2.pdf'],
+  ppm:['宠物中毒求助热线：狗与霉菌毒素','https://www.petpoisonhelpline.com/pet-tips/the-dangers-of-mycotoxins-in-dogs/'],
+  review:['兽医学综述（2016）：对猫狗有毒的家庭食物','https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4801869/']
+};
+const FLV={no:['绝对不能吃','#E5484D','#FFE1E1'],care:['少量 / 有条件','#B7860B','#FFF1C2'],ok:['可以吃','#1E9E6A','#DDF6EB']};
+const FCAT=['水果','蔬菜','肉蛋奶','主食','零食甜食','坚果','饮品','调味','其他'];
+// [等级, 表情, 名称, 别名(用于搜索), 分类, 一句话, 详细说明, 来源]
+const FOOD=[
+['no','🍇','葡萄 / 葡萄干','提子 红提 青提 巨峰 阳光玫瑰 葡萄干 加仑子 醋栗 罗望子 酸角 葡萄汁','水果','可能导致急性肾衰竭，一颗也别给','默克兽医手册认为致病成分是酒石酸。不同葡萄含量差别很大，狗之间的敏感程度也差很多，所以没有"安全量"。通常 6–12 小时内呕吐或腹泻，1–3 天内可能肾衰竭。葡萄干、加仑子、罗望子（酸角）同理，含葡萄干的面包、麦片也算。','merck aspca akc review'],
+['no','🍫','巧克力 / 可可','可可 可可粉 黑巧 牛奶巧克力 白巧克力 巧克力饼干 布朗尼 热可可 可可豆','零食甜食','可可碱和咖啡因会引起心律失常、抽搐','越黑越危险：可可粉 > 烘焙用无糖巧克力 > 黑巧 > 牛奶巧克力；白巧克力几乎不含可可碱，但又油又甜。症状一般在 6–12 小时出现：呕吐、腹泻、口渴、兴奋、心跳快而乱、颤抖、抽搐，严重可致死。没有方便的化验能确诊，吃了直接联系医生。','mChoc aspca akc'],
+['no','🍬','木糖醇','无糖口香糖 无糖糖果 代糖 xylitol 无糖花生酱 坚果酱 牙膏 无糖烘焙 无糖零食','零食甜食','少量就会让血糖骤降，剂量大会伤肝','狗吃了木糖醇会大量分泌胰岛素，30 分钟内就可能严重低血糖（口香糖里的会晚一些），表现为呕吐、无力、走不稳、抽搐；剂量更大时 1–2 天后可能肝衰竭。默克兽医手册：不要在家催吐，活性炭也吸附不了，直接去医院。给狗吃花生酱、零食前先看配料表。','mXyl merck aspca akc'],
+['no','🧅','洋葱 / 大蒜 / 葱 / 韭菜','洋葱 大蒜 蒜 蒜头 葱 小葱 大葱 葱花 韭菜 韭黄 蒜苗 蒜薹 红葱头 洋葱粉 蒜粉 葱油 洋葱圈 韭葱 细香葱','调味','破坏红细胞，导致溶血性贫血','生的、熟的、晒干的、粉末都有毒，粉末和脱水的浓度更高。大蒜的毒性约是洋葱的 3–5 倍。症状常在吃后几天才出现：无力、牙龈发白、发黄、虚脱。人吃的剩菜、汤、肉馅、调料包大多有葱蒜，是最常见的误食来源。','mAll aspca akc'],
+['no','🌰','夏威夷果','澳洲坚果 夏威夷果 macadamia','坚果','后腿无力、颤抖、发热','狗是目前唯一报告过中毒的动物，具体成分还不清楚。通常 12 小时内出现无力、走不稳、呕吐、颤抖、发热，多数 1–3 天恢复。注意混合坚果和饼干里的。','merck aspca akc'],
+['no','🍺','酒和含酒精的食物','酒 啤酒 白酒 红酒 葡萄酒 黄酒 料酒 醪糟 酒酿 酒心巧克力 鸡尾酒 酒精','饮品','少量就会中毒，严重可致死','会引起呕吐、腹泻、走不稳、精神沉郁、呼吸困难、颤抖，严重会昏迷甚至死亡。醪糟、酒酿、酒心糖、做菜的料酒都算。','aspca'],
+['no','🫓','生面团（含酵母）','生面团 发面 酵母面团 没烤的面包 生馒头 面肥','主食','在胃里继续发酵膨胀，还会产生酒精','含酵母的生面团在胃里会继续发起来，引起腹胀、干呕，易感的狗可能胃扭转；发酵产生的酒精还会让狗酒精中毒。烤熟的原味面包不算（见"面包"）。','merck aspca'],
+['no','☕','咖啡 / 茶 / 能量饮料','咖啡 咖啡豆 咖啡渣 茶 茶叶 茶包 奶茶 可乐 能量饮料 红牛 抹茶','饮品','咖啡因和巧克力里的成分同类','咖啡因和可可碱同属甲基黄嘌呤，会让狗兴奋、心律失常、颤抖、抽搐。咖啡渣、茶包也要收好。','aspca akc'],
+['no','🍖','熟骨头 / 鱼刺','骨头 鸡骨头 鸡翅 鸡腿骨 鸭骨 鱼刺 鱼骨 排骨 猪骨 筒骨 大骨棒 牛骨 骨头零食','肉蛋奶','咬碎后是尖锐碎片，会噎住、扎伤或堵住肠道','骨头可能卡在食道或气管；咬碎后的尖片会划伤嘴、食道和胃，在肠道里可能扎穿引起感染，也可能堵住需要手术取出。症状可能几天后才出现：呕吐、腹泻、不吃东西、肚子疼。啃剩的骨头直接扔进狗够不到的垃圾桶。','fdaBone aspca akcChk'],
+['no','🦠','发霉的食物','发霉 霉 剩饭 剩菜 垃圾 厨余 发霉面包 发霉奶酪 发霉坚果 堆肥 变质','其他','霉菌毒素会让狗颤抖、抽搐、发高烧','发霉的面包、奶酪、坚果、剩饭里可能有震颤性霉菌毒素，少量吃下 30 分钟到几小时就可能出现兴奋、喘、流口水、呕吐、颤抖、抽搐、体温升高；黄曲霉毒素还会伤肝。及时治疗多数预后较好。','ppm'],
+['no','🍄','野生蘑菇','蘑菇 野蘑菇 野生菌 菌子 草地蘑菇','蔬菜','野外的蘑菇可能致命','散步时草地里的蘑菇很难分辨，有的毒性极强，看到狗吃了马上就医。超市买的普通食用菌洗净煮熟、不加调料，一般没问题。','akcFV'],
+['no','🌽','玉米棒（玉米芯）','玉米棒 玉米芯 啃玉米','其他','咬不碎，容易堵住肠道','AKC 明确说不要给狗玉米棒。原味玉米粒可以少量吃（见"玉米粒"）。','akc'],
+
+['care','🥓','肥肉 / 油炸 / 加工肉','肥肉 五花肉 鸡皮 油炸 炸鸡 薯条 培根 火腿 香肠 腊肠 烤肠 肉皮 猪油','肉蛋奶','容易呕吐腹泻，可能诱发胰腺炎','高脂食物会引起呕吐、腹泻，严重时诱发胰腺炎；火腿、香肠、培根同时又很咸。柯基容易胖，这类东西尽量别给。','akc aspca'],
+['care','🧂','太咸的食物','盐 咸 咸菜 榨菜 腊肉 咸鱼 薯片 酱油 方便面 卤味 剩菜','调味','过量的钠会让狗呕吐，严重会抽搐','吃下大量盐会极度口渴、多尿、呕吐、腹泻、颤抖，严重会抽搐甚至死亡。给狗的东西都不要加盐和调料。','aspca'],
+['care','🥛','牛奶和奶制品','牛奶 羊奶 奶酪 芝士 冰淇淋 雪糕 奶油 酸奶','肉蛋奶','很多狗乳糖不耐，会拉肚子','狗体内的乳糖酶少，喝牛奶容易腹泻。能耐受的狗可以少量吃原味无糖酸奶（确认不含木糖醇）、低脂奶酪；冰淇淋又甜又油，不建议。','aspca akc'],
+['care','🥩','生肉 / 生蛋 / 生鱼','生肉 生鸡蛋 生蛋 生蛋清 生鱼 刺身 生骨肉 生食','肉蛋奶','可能带沙门氏菌、李斯特菌，还会传给人','FDA 检测发现生食宠物粮比其他宠物食品更容易带致病菌，冷冻也杀不死；狗吃了可能没症状，却会通过粪便和口水把细菌带到家里。生蛋清里的酶会影响维生素吸收，生三文鱼可能有寄生虫。肉、蛋、鱼都要全熟。','fdaRaw aspca akc akcBeef'],
+['care','🥑','牛油果','牛油果 鳄梨 avocado','水果','果肉毒性低但很油，果核会卡住','牛油果里的毒素主要危害鸟、兔、马等，狗不是主要易感动物；但果皮、果核、叶子可能让狗呕吐腹泻，果核会噎住或堵肠，果肉脂肪高。要给只给一点点果肉。','akcFV merck akc'],
+['care','🍒','带核 / 带籽的水果','樱桃 车厘子 桃核 李子 杏 杏核 芒果核 枣核 苹果籽 果核 果籽','水果','果核会噎住、堵肠，樱桃的核和茎叶含氰化物','樱桃除了果肉，其他部分都含氰化物；桃、李、杏、芒果等的大果核会噎住或堵住肠道。给水果一律先去核去籽，只给果肉。','akcFV'],
+['care','🥜','其他坚果','杏仁 巴旦木 核桃 碧根果 山核桃 开心果 腰果 花生 瓜子','坚果','油脂高，可能呕吐腹泻甚至胰腺炎','杏仁、核桃、碧根果油脂很高，可能引起呕吐、腹泻和胰腺炎；发霉的坚果还有霉菌毒素。AKC 认为原味、无盐、去壳的腰果和花生只能偶尔给几颗。夏威夷果另算，绝对不能吃。','aspca akc ppm'],
+['care','🍊','柑橘类','橙子 橘子 砂糖橘 柚子 柠檬 西柚 金桔 沃柑','水果','果肉少量可以，皮、籽、叶会刺激肠胃','柑橘的皮、籽、茎叶含柠檬酸和精油，会刺激肠胃；少量果肉一般只会轻微肠胃不适。AKC：橙子只给去皮去籽的果肉。','aspca akcFV'],
+['care','🍅','西红柿','番茄 西红柿 小番茄 圣女果 青番茄 番茄藤 番茄酱','蔬菜','熟透的果肉一般安全，绿色部分含龙葵碱','番茄的茎、叶和没熟的青番茄含龙葵碱，AKC 建议保险起见干脆不给。番茄酱、番茄炒蛋还有盐和葱蒜，更不能给。','akcFV'],
+['care','🥔','土豆','土豆 马铃薯 薯泥 发芽土豆','蔬菜','只能给煮熟的原味，生的和发青的不行','煮熟、软烂、原味的土豆可以偶尔少量给。生的或半生的不安全；发绿、发芽的部分含龙葵碱，绝对不能给，吃了出现呕吐、腹泻、无力要马上就医。薯条薯片又油又咸。','akcPot'],
+['care','🍠','红薯','红薯 地瓜 番薯','主食','煮熟去皮可以少量，热量不低','要煮熟去皮，不能生吃，不能加糖。纤维多，但热量和升糖都不低，AKC 也提到新研究认为不宜大量作为日常饮食。柯基容易胖，偶尔一点就好。','akcSP'],
+['care','🥥','椰子 / 椰子油','椰子 椰肉 椰奶 椰子油 椰浆','水果','油脂多，可能软便腹泻','椰肉、椰奶的油脂可能引起肠胃不适、软便；少量一般没大问题。椰子壳要收好。','aspca akc'],
+['care','🥜','花生酱','花生酱 坚果酱','零食甜食','先看配料表，有木糖醇的绝对不行','一些"无糖"花生酱、坚果酱含木糖醇。选配料只有花生的天然花生酱，一次一茶匙以内。','akc mXyl'],
+['care','🍞','面包','面包 吐司','主食','烤熟的原味面包可以少量','原味、烤熟的面包少量没问题，但营养意义不大；含葡萄干、巧克力、木糖醇或葱蒜的不行，生面团绝对不行。','akc'],
+['care','🍯','蜂蜜','蜂蜜 糖','零食甜食','主要是糖，偶尔一点点','健康的成年犬偶尔少量没问题，但没必要常给。','akc'],
+['care','🦐','虾','虾 虾仁','肉蛋奶','只给熟的、去壳去头尾，几只就好','煮熟的虾肉少量可以；壳、头、腿、尾要去掉；炸的、调过味的不行。','akc'],
+['care','🐟','金枪鱼','金枪鱼 吞拿鱼 金枪鱼罐头','肉蛋奶','汞含量偏高，偶尔少量','AKC 建议避开长鳍、黄鳍、蓝鳍、大眼金枪鱼和"白"金枪鱼罐头，选鲣鱼（淡金枪鱼）、水浸、无盐的，偶尔少量。','akc'],
+['care','🥦','西兰花','西兰花 西蓝花','蔬菜','少量熟的可以，多了刺激肠胃','花球里的异硫氰酸盐可能刺激肠胃，粗茎可能卡在食道。煮熟、切小、少量更安全。','akcFV'],
+['care','🥬','菠菜','菠菜','蔬菜','能吃但不推荐，草酸多','菠菜的草酸会影响钙吸收，大量吃可能伤肾。','akcFV'],
+['care','🫐','树莓','树莓 覆盆子','水果','含少量天然木糖醇，别多给','可以少量当零食，不要一次吃很多。','akcFV'],
+['care','🍿','爆米花','爆米花','零食甜食','只能是原味、无盐、无黄油的','空气爆的原味爆米花少量可以；焦糖、奶油、芝士、咸味的不行，没爆开的硬粒要挑掉。','akc'],
+
+['ok','🍗','鸡肉','鸡肉 鸡胸肉 鸡腿肉 火鸡','肉蛋奶','煮熟、去皮去骨、不加调料','优质蛋白，可以当零食或拌进饭里。肠胃不舒服时，兽医常建议短期吃水煮鸡肉配白米饭。注意：鸡肉是狗常见的过敏原之一，第一次给少量观察。','akcChk akc'],
+['ok','🥩','牛肉 / 瘦猪肉','牛肉 牛排 牛肉末 猪肉 瘦肉 里脊','肉蛋奶','全熟、去肥、去骨、不调味','熟的瘦肉切小块可以作为补充。只吃肉、或者长期只吃"肉+米饭"会缺钙，肉不能代替狗粮。','akcBeef akc'],
+['ok','🥚','鸡蛋','鸡蛋 水煮蛋 蛋黄 蒸蛋 炒蛋','肉蛋奶','全熟、不加油盐','完全煮熟的鸡蛋是很好的蛋白质；不要生蛋清，炒蛋别放油盐葱。','akc'],
+['ok','🐟','三文鱼和其他鱼','鱼 三文鱼 鲑鱼 鳕鱼 沙丁鱼 鱼肉','肉蛋奶','全熟、剔干净刺','不要生的、烟熏的；罐头选水浸、无盐的。沙丁鱼罐头里的软骨可以吃。','akc'],
+['ok','🍚','米饭','米饭 白米饭 白粥 糙米 大米','主食','清水煮熟的原味米饭','白米饭好消化，腹泻时兽医常建议鸡肉配米饭；糙米营养多但没那么好消化。只用清水煮，不加调料。狗粮里已经有碳水，别加太多。','akcRice'],
+['ok','🌽','玉米粒','玉米 玉米粒','主食','原味、不加黄油和盐','剥下来的原味玉米粒可以少量；玉米棒不行。','akc'],
+['ok','🥕','胡萝卜','胡萝卜 红萝卜','蔬菜','低热量、高纤维，嚼着还能磨牙','生的熟的都可以，切成合适大小。','akcFV'],
+['ok','🥒','黄瓜','黄瓜','蔬菜','几乎没有热量，适合当零食','腌黄瓜、拍黄瓜（有盐和蒜）不行。','akcFV'],
+['ok','🫛','四季豆 / 豌豆','四季豆 豆角 青豆 豌豆','蔬菜','原味、不加盐','新鲜或冷冻的都可以，罐头要选无盐的。','akcFV'],
+['ok','🎃','南瓜','南瓜 南瓜泥','蔬菜','煮熟、原味','不要加糖和调料。','akcFV'],
+['ok','🥒','西葫芦','西葫芦 角瓜','蔬菜','原味，生熟都可以','不加油盐。','akcFV'],
+['ok','🥬','芹菜','芹菜 西芹','蔬菜','切小块，少量','含维生素，可能还能让口气清新一点。','akcFV'],
+['ok','🍎','苹果','苹果','水果','去核去籽','果肉有维生素和纤维，核和籽一定去掉。','akcFV'],
+['ok','🫐','蓝莓','蓝莓','水果','可以直接给','小颗粒，适合当训练奖励。','akcFV'],
+['ok','🍓','草莓','草莓','水果','洗净切小','含糖，适量。','akcFV'],
+['ok','🍉','西瓜','西瓜','水果','去皮去籽','瓜皮和籽要去掉。','akcFV'],
+['ok','🍈','哈密瓜','哈密瓜','水果','去皮去籽，适量','含糖，少量。','akcFV'],
+['ok','🍐','梨','梨','水果','去核去籽','籽要去掉。','akcFV'],
+['ok','🍑','桃','桃 桃子 黄桃','水果','只给果肉，核一定去掉','桃核会噎住或堵肠。罐头黄桃糖多，不建议。','akcFV'],
+['ok','🍍','菠萝','菠萝 凤梨','水果','去皮去芯','只给果肉。','akcFV'],
+['ok','🍌','香蕉','香蕉','水果','糖分高，当零食少量给','不要当正餐的一部分。','akcFV']
+];
+const FOOD_TIPS=[
+  ['🍽️ 零食加起来不超过每天热量的 10%','水果、蔬菜、肉干、零食都算在里面，其余 90% 以上要来自完整均衡的狗粮。柯基容易胖，这条尤其重要。','wsava'],
+  ['🧪 新东西先给一点点','第一次吃的食物少量给，观察一两天有没有呕吐、拉肚子、皮肤痒。','akc'],
+  ['🚫 给狗的东西一律不加调料','油、盐、酱油、葱、蒜、糖都不要加。人吃的剩菜大多不合适。','aspca']
+];
+let foodQ='',foodLv='all',foodCat='all',foodOpen=null;
+const fnorm=s=>String(s||'').toLowerCase().replace(/\s+/g,'');
+function foodMatch(f){
+  if(foodLv!=='all'&&f[0]!==foodLv)return false;if(foodCat!=='all'&&f[4]!==foodCat)return false;
+  const q=fnorm(foodQ);if(!q)return true;
+  const hay=fnorm(f[2]+' '+f[3]+' '+f[4]);if(hay.includes(q))return true;
+  return f[3].split(/\s+/).some(a=>a&&q.includes(fnorm(a)));  // 输入"六月吃了两颗提子"也能找到
+}
+function openFood(q){
+  if(typeof q==='string'){foodQ=q;foodLv='all';foodCat='all'}
+  sheet(`<h3>能不能吃</h3><div class="hint">按 ASPCA 动物中毒控制中心、默克兽医手册、美国 FDA、AKC 等资料整理，每条都附出处。</div>
+  <div class="fsearch"><span>🔍</span><input id="fq" placeholder="搜食物，比如：提子、蒜、酸奶" value="${esc(foodQ)}" oninput="foodQ=this.value;renderFoodList()" autocomplete="off"></div>
+  <div class="fchips" id="fLv">${[['all','全部'],['no','绝对不能吃'],['care','少量 / 有条件'],['ok','可以吃']].map(([k,n])=>`<button class="${foodLv===k?'on':''}" ${k!=='all'?`style="--fc:${FLV[k][1]}"`:''} onclick="foodLv='${k}';renderFoodChips();renderFoodList()">${n}</button>`).join('')}</div>
+  <div class="fchips sm" id="fCat"></div>
+  <div class="fsos">⚠️ <b>误食了不能吃的东西：</b>马上联系宠物医院${S.dog.hospital?`（${esc(S.dog.hospital)}）`:''}，告诉医生吃了什么、大概多少、什么时候吃的，以及${esc(S.dog.name)}的体重（${(sortDesc(live(S.weights))[0]||{}).kg||'?'} kg）。不要自己在家催吐，除非医生让你做。</div>
+  <div id="fList"></div>
+  <div class="sec" style="margin-top:20px"><h3>喂食的三条原则</h3></div>
+  ${FOOD_TIPS.map(t=>`<div class="ftip"><b>${t[0]}</b><p>${t[1]}</p>${srcLinks([t[2]])}</div>`).join('')}
+  <div class="sec"><h3>资料来源</h3></div>
+  <div class="fsrcs">${Object.values(FSRC).map(s=>`<a href="${s[1]}" target="_blank" rel="noopener">${esc(s[0])}</a>`).join('')}</div>
+  <div class="hint" style="margin-top:12px">这里是通用的科学资料，不能代替兽医。${esc(S.dog.name)}有特殊情况（生病、吃药、过敏）时听医生的。没查到的食物，没把握就先别喂。</div>`);
+  renderFoodChips();renderFoodList();
+}
+function srcLinks(keys){return `<div class="fsrc">出处：${keys.map(k=>FSRC[k]).filter(Boolean).map(s=>`<a href="${s[1]}" target="_blank" rel="noopener">${esc(s[0])}</a>`).join('；')}</div>`}
+function renderFoodChips(){
+  document.querySelectorAll('#fLv button').forEach(b=>b.classList.toggle('on',b.getAttribute('onclick').includes(`'${foodLv}'`)));
+  const el=document.getElementById('fCat');if(el)el.innerHTML=['all',...FCAT].map(c=>`<button class="${foodCat===c?'on':''}" onclick="foodCat='${c}';renderFoodChips();renderFoodList()">${c==='all'?'所有分类':c}</button>`).join('');
+}
+function renderFoodList(){
+  const el=document.getElementById('fList');if(!el)return;
+  const list=FOOD.filter(foodMatch),mine=live(S.avoid).map(a=>fnorm(a.name));
+  const order={no:0,care:1,ok:2};list.sort((a,b)=>order[a[0]]-order[b[0]]);
+  if(!list.length){el.innerHTML=`<div class="fempty">没找到"${esc(foodQ)}"。<br>没把握的东西先别喂，问一下医生。</div>`;return}
+  el.innerHTML=`<div class="fcount">${list.length} 种</div>`+list.map((f,i)=>{const lv=FLV[f[0]],id=FOOD.indexOf(f),open=foodOpen===id||(list.length<=2&&foodQ);
+    const hit=mine.some(m=>m&&(fnorm(f[2]+f[3]).includes(m.split('/')[0])||m.includes(fnorm(f[2]).split('/')[0])));
+    return `<div class="food${open?' open':''}" onclick="foodOpen=foodOpen===${id}?null:${id};renderFoodList()">
+      <div class="fh"><i>${f[1]}</i><div class="ft"><b>${esc(f[2])}</b><span>${esc(f[5])}</span></div><em style="color:${lv[1]};background:${lv[2]}">${lv[0]}</em></div>
+      ${hit?`<div class="fmine">📌 ${esc(S.dog.name)}的忌口里也有这一项</div>`:''}
+      ${open?`<div class="fd"><p>${esc(f[6])}</p>${srcLinks(f[7].split(' '))}</div>`:''}
+    </div>`}).join('');
+}
+
 /* ===== 档案 ===== */
 function renderMe(){
   const d=S.dog,ms=sortDesc(live(S.measures));
@@ -793,8 +953,9 @@ function renderMe(){
   <div class="sec"><h3>📏 尺寸</h3><button onclick="openForm('measure')">+ 量一次</button></div>
   <div class="card">${ms[0]?`<div class="size" onclick="editItem('measures','${ms[0].id}')"><div><b>${ms[0].chest}<small>cm</small></b><span>胸围</span></div><div><b>${ms[0].length}<small>cm</small></b><span>身长</span></div></div>
     <div style="font-size:12px;color:var(--sub);font-weight:700;margin-top:10px">${ymd(ms[0].date)} 量的 · ${ageText(ms[0].date)}${ms[1]?` · 上次胸围 ${ms[1].chest}、身长 ${ms[1].length}`:''}。买胸背、做衣服用。</div>`:'<div class="empty">还没量过</div>'}</div>
-  <div class="sec"><h3>🚫 不能吃</h3><button onclick="openForm('avoid')">+ 添加</button></div>
+  <div class="sec"><h3>🚫 ${esc(d.name)}的忌口</h3><button onclick="openForm('avoid')">+ 添加</button></div>
   <div class="card">${live(S.avoid).map(a=>`<div class="avoid" onclick="editItem('avoid','${a.id}')"><i>${esc(a.e||'🚫')}</i><div><b>${esc(a.name)}</b><span>${esc(a.note||'')}</span></div></div>`).join('')||'<div class="empty">还没有</div>'}</div>
+  <div class="foodbar" style="margin:-2px 0 0" onclick="openFood('')"><span style="font-size:22px">🍽️</span><span class="q">查查哪些能吃、哪些不能吃</span><b style="color:var(--sub)">›</b></div>
   <div class="sec" id="cloudSec"><h3>☁️ 云同步</h3></div>
   <div class="card" id="cloudCard">${cloudPanel()}</div>
   <div class="sec"><h3>📕 小红书</h3></div>
